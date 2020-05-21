@@ -45,6 +45,7 @@ class EditAssessmentViewController: UIViewController {
         currentAssessment?.notes = notes.text
         currentAssessment?.markAwarded = mark.text
         currentAssessment?.isReminderSet = saveToCal.isOn
+        //todo do the reminding thing
         (UIApplication.shared.delegate as! AppDelegate).saveContext()
         //close popover
         self.presentingViewController!.dismiss(animated: false, completion: nil)

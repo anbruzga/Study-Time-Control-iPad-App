@@ -20,6 +20,8 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.tableView.delegate = self
+        self.tableView.dataSource = self
         // Do any additional setup after loading the view.
         configureView()
     }
@@ -30,7 +32,7 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
            let title = self.fetchedResultsController.fetchedObjects?[indexPath.row].title
            cell.textLabel?.text = title
            cell.backgroundColor = cellColour
-           if let taskNotes =  self.fetchedResultsController.fetchedObjects?[indexPath.row].notes{
+        if let taskNotes =  self.fetchedResultsController.fetchedObjects?[indexPath.row].notes {
                cell.detailTextLabel?.text = taskNotes
            }
            else {
@@ -62,6 +64,7 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
             configureView()
         }
     }
+    var task: Task?
     
     // MARK: - PREPARE
     override func prepare(for segue: UIStoryboardSegue, sender: Any?){
@@ -77,9 +80,14 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
                 controller.currentAssessment = object
                 break
             case "editTask":
-                let object = self.assessment
-                let controller = segue.destination as! EditTaskViewController
-                controller.currentAssessment = object
+                if let indexPath = tableView.indexPathForSelectedRow {
+                   // let context = fetchedResultsController.managedObjectContext
+                    let object = fetchedResultsController.object(at: indexPath)
+                    let assessment = self.assessment
+                    let controller = segue.destination as! EditTaskViewController
+                    controller.currentAssessment = assessment
+                    controller.currentTask = object
+                }
                 break
             default:
                 break
@@ -134,7 +142,8 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
         }
         else {
             // force programamtic seleciton to the first line? TODO
-            
+            let predicate = NSPredicate(format: "assessment = %@",  "Pink Floyd")
+            fetchRequest.predicate = predicate
         }
         
         // Edit the section name key path and cache name if appropriate.
