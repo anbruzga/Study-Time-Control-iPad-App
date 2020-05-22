@@ -49,6 +49,7 @@ class AssessmentSummaryViewController: UIViewController {
                 if(Int(dateString)! >= 24 ) { // if >= than day, display in hours and days
                     hours = String(Int(dateString)! % 24) // hours
                     days = String(Int(dateString)! / 24) // days
+                    //todo fix grammar
                     labelDaysLeft.text =  days + " Days " + " and " + hours + " hours left"
                 }
                 else { // else display just hours
@@ -63,7 +64,8 @@ class AssessmentSummaryViewController: UIViewController {
             let components = cal.dateComponents([.hour], from: (currentAssessment?.dateWhenSet)!, to: dateDue)
             let diff = components.hour!
             let hoursString = "\(diff)"
-            // MAX PROGRESS is diff in hrs of dateWhenSet of assessment to dueTime
+            // This is displaying diff between date due and date now!!! TODO
+            // MAX PROGRESS is 1 - (RATIO in hrs of dateWhenSet of assessment AND dueTime)
             let maxProgress = Int(hoursString)! //hours in week
             let progressRatioReversed = Float(1 - (Float(currentProgress) / Float(maxProgress)))
             progressViewForDaysLeft.progress = Float(progressRatioReversed)

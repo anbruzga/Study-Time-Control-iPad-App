@@ -21,6 +21,8 @@
 		B92C31882476A41E00AC2726 /* AssessmentSummaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B92C31872476A41E00AC2726 /* AssessmentSummaryViewController.swift */; };
 		B9E5E7532476BF370056DB90 /* AddTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9E5E7522476BF370056DB90 /* AddTaskViewController.swift */; };
 		B9E5E7552476BF560056DB90 /* EditTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9E5E7542476BF560056DB90 /* EditTaskViewController.swift */; };
+		B9E5E7B224782AE50056DB90 /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9E5E7B124782AE50056DB90 /* CustomTableViewCell.swift */; };
+		B9E5E7B4247838E80056DB90 /* DateUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9E5E7B3247838E80056DB90 /* DateUtils.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,6 +54,8 @@
 		B92C31872476A41E00AC2726 /* AssessmentSummaryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssessmentSummaryViewController.swift; sourceTree = "<group>"; };
 		B9E5E7522476BF370056DB90 /* AddTaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTaskViewController.swift; sourceTree = "<group>"; };
 		B9E5E7542476BF560056DB90 /* EditTaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTaskViewController.swift; sourceTree = "<group>"; };
+		B9E5E7B124782AE50056DB90 /* CustomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
+		B9E5E7B3247838E80056DB90 /* DateUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateUtils.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,6 +111,8 @@
 				B92C31872476A41E00AC2726 /* AssessmentSummaryViewController.swift */,
 				B9E5E7522476BF370056DB90 /* AddTaskViewController.swift */,
 				B9E5E7542476BF560056DB90 /* EditTaskViewController.swift */,
+				B9E5E7B124782AE50056DB90 /* CustomTableViewCell.swift */,
+				B9E5E7B3247838E80056DB90 /* DateUtils.swift */,
 			);
 			path = StudyTracker;
 			sourceTree = "<group>";
@@ -222,7 +228,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				B92C315424756FAF00AC2726 /* MasterViewController.swift in Sources */,
+				B9E5E7B4247838E80056DB90 /* DateUtils.swift in Sources */,
 				B92C315024756FAF00AC2726 /* StudyTracker.xcdatamodeld in Sources */,
+				B9E5E7B224782AE50056DB90 /* CustomTableViewCell.swift in Sources */,
 				B92C315624756FAF00AC2726 /* DetailViewController.swift in Sources */,
 				B92C31882476A41E00AC2726 /* AssessmentSummaryViewController.swift in Sources */,
 				B92C314D24756FAF00AC2726 /* AppDelegate.swift in Sources */,

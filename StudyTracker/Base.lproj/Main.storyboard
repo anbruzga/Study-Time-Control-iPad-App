@@ -38,35 +38,105 @@
                                 </connections>
                             </containerView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="RdK-LC-w1s">
-                                <rect key="frame" x="20" y="272" width="663.5" height="476"/>
+                                <rect key="frame" x="20" y="311" width="663.5" height="437"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="476" id="7bY-9F-LUM"/>
+                                    <constraint firstAttribute="height" constant="437" id="ch6-rf-WNy"/>
                                 </constraints>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="taskCell" textLabel="0eF-e8-k6J" detailTextLabel="lSJ-Bs-XFb" rowHeight="70" style="IBUITableViewCellStyleSubtitle" id="eCa-I3-WQa">
-                                        <rect key="frame" x="0.0" y="28" width="663.5" height="70"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="taskCell" rowHeight="130" id="eCa-I3-WQa" customClass="CustomTableViewCell" customModule="StudyTracker" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="663.5" height="130"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="eCa-I3-WQa" id="c0U-Je-Mee">
-                                            <rect key="frame" x="0.0" y="0.0" width="663.5" height="70"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="663.5" height="130"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="0eF-e8-k6J">
-                                                    <rect key="frame" x="15" y="15" width="33.5" height="20.5"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cell No" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f3b-nG-aik">
+                                                    <rect key="frame" x="10" y="53" width="56" height="24"/>
+                                                    <fontDescription key="fontDescription" name="NotoSansKannada-Regular" family="Noto Sans Kannada" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="lSJ-Bs-XFb">
-                                                    <rect key="frame" x="15" y="38.5" width="44" height="14.5"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oZx-X4-Mud">
+                                                    <rect key="frame" x="121.5" y="53" width="420.5" height="24"/>
+                                                    <fontDescription key="fontDescription" name="NotoSansKannada-Bold" family="Noto Sans Kannada" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Notes" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nvj-X1-asD">
+                                                    <rect key="frame" x="10" y="95" width="643.5" height="24"/>
+                                                    <fontDescription key="fontDescription" name="NotoSansKannada-Regular" family="Noto Sans Kannada" pointSize="13"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="hwE-o8-Fde">
+                                                    <rect key="frame" x="142" y="33" width="383.5" height="2"/>
+                                                </progressView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="60%" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0Wl-hb-frA">
+                                                    <rect key="frame" x="607" y="54" width="35" height="22"/>
+                                                    <fontDescription key="fontDescription" name="NotoSansKannada-Light" family="Noto Sans Kannada" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="ue7-7I-QqY">
+                                                    <rect key="frame" x="546" y="64" width="53" height="2"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="53" id="0LP-ah-EFA"/>
+                                                    </constraints>
+                                                </progressView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Progress" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nE3-5H-xk5">
+                                                    <rect key="frame" x="546" y="35" width="89" height="21"/>
+                                                    <fontDescription key="fontDescription" name="NotoSansKannada-Regular" family="Noto Sans Kannada" pointSize="13"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="6 Days" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bdr-Fe-6pu">
+                                                    <rect key="frame" x="311.5" y="11" width="41" height="18"/>
+                                                    <fontDescription key="fontDescription" name="NotoSansKannada-Regular" family="Noto Sans Kannada" pointSize="13"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstItem="hwE-o8-Fde" firstAttribute="leading" secondItem="c0U-Je-Mee" secondAttribute="leadingMargin" constant="127" id="8ND-RA-uyR"/>
+                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="f3b-nG-aik" secondAttribute="trailing" constant="20" symbolic="YES" id="99j-su-wIj"/>
+                                                <constraint firstItem="nvj-X1-asD" firstAttribute="top" secondItem="0Wl-hb-frA" secondAttribute="bottom" constant="19" id="C3T-Dm-gRD"/>
+                                                <constraint firstItem="f3b-nG-aik" firstAttribute="top" secondItem="c0U-Je-Mee" secondAttribute="top" constant="53" id="CLp-WW-4fH"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="0Wl-hb-frA" secondAttribute="trailing" constant="6.5" id="DFj-dg-g58"/>
+                                                <constraint firstItem="0Wl-hb-frA" firstAttribute="leading" secondItem="oZx-X4-Mud" secondAttribute="trailing" constant="65" id="FB2-Kx-BXV"/>
+                                                <constraint firstItem="oZx-X4-Mud" firstAttribute="top" secondItem="hwE-o8-Fde" secondAttribute="bottom" constant="18" id="Gfe-Zw-wkS"/>
+                                                <constraint firstItem="nvj-X1-asD" firstAttribute="leading" secondItem="c0U-Je-Mee" secondAttribute="leading" constant="10" id="Ikr-7o-I2y"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="oZx-X4-Mud" secondAttribute="bottom" constant="42" id="Kso-dU-gYK"/>
+                                                <constraint firstItem="ue7-7I-QqY" firstAttribute="top" secondItem="nE3-5H-xk5" secondAttribute="bottom" constant="8" id="M4V-f6-NSI"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="oZx-X4-Mud" secondAttribute="trailing" constant="106.5" id="N5A-dc-sER"/>
+                                                <constraint firstItem="nvj-X1-asD" firstAttribute="top" secondItem="f3b-nG-aik" secondAttribute="bottom" constant="18" id="N9g-6i-t0x"/>
+                                                <constraint firstAttribute="bottom" secondItem="f3b-nG-aik" secondAttribute="bottom" constant="53" id="Ow5-Y7-Z5p"/>
+                                                <constraint firstItem="0Wl-hb-frA" firstAttribute="centerY" secondItem="ue7-7I-QqY" secondAttribute="centerY" id="Qlp-bE-trZ"/>
+                                                <constraint firstItem="bdr-Fe-6pu" firstAttribute="centerX" secondItem="oZx-X4-Mud" secondAttribute="centerX" id="VpH-RA-BkF"/>
+                                                <constraint firstAttribute="trailing" secondItem="nvj-X1-asD" secondAttribute="trailing" constant="10" id="XhQ-D2-D3O"/>
+                                                <constraint firstItem="0Wl-hb-frA" firstAttribute="centerY" secondItem="oZx-X4-Mud" secondAttribute="centerY" id="YRK-aj-Yml"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="hwE-o8-Fde" secondAttribute="trailing" constant="123" id="YzR-tF-5QL"/>
+                                                <constraint firstAttribute="bottom" secondItem="nvj-X1-asD" secondAttribute="bottom" constant="11" id="ZFL-VD-Fbq"/>
+                                                <constraint firstItem="oZx-X4-Mud" firstAttribute="top" secondItem="c0U-Je-Mee" secondAttribute="topMargin" constant="42" id="dQ1-Rh-Q21"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="ue7-7I-QqY" secondAttribute="trailing" constant="49.5" id="isB-Fz-b0s"/>
+                                                <constraint firstItem="hwE-o8-Fde" firstAttribute="top" secondItem="c0U-Je-Mee" secondAttribute="topMargin" constant="22" id="kPn-jX-C3K"/>
+                                                <constraint firstItem="oZx-X4-Mud" firstAttribute="leading" secondItem="c0U-Je-Mee" secondAttribute="leadingMargin" constant="106.5" id="pQV-BJ-fTV"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="nE3-5H-xk5" secondAttribute="trailing" constant="13.5" id="sGd-aU-d1H"/>
+                                                <constraint firstItem="f3b-nG-aik" firstAttribute="leading" secondItem="c0U-Je-Mee" secondAttribute="leading" constant="10" id="tRc-Ym-UDu"/>
+                                                <constraint firstItem="nE3-5H-xk5" firstAttribute="leading" secondItem="ue7-7I-QqY" secondAttribute="leading" id="u7V-k7-L1c"/>
+                                                <constraint firstItem="bdr-Fe-6pu" firstAttribute="top" secondItem="c0U-Je-Mee" secondAttribute="topMargin" id="wTu-az-SQh"/>
+                                                <constraint firstItem="nE3-5H-xk5" firstAttribute="top" secondItem="c0U-Je-Mee" secondAttribute="topMargin" constant="24" id="xgn-1D-ZFC"/>
+                                            </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="cellNo" destination="f3b-nG-aik" id="uYM-gL-4el"/>
+                                            <outlet property="daysLeft" destination="bdr-Fe-6pu" id="i8J-O5-v5l"/>
+                                            <outlet property="notes" destination="nvj-X1-asD" id="Jfg-vb-WzP"/>
+                                            <outlet property="percentCompleted" destination="0Wl-hb-frA" id="xNX-8o-gyk"/>
+                                            <outlet property="progressBarDaysLeft" destination="hwE-o8-Fde" id="K6h-v3-OTY"/>
+                                            <outlet property="progressBarPercentLeft" destination="ue7-7I-QqY" id="eXd-Ow-35T"/>
+                                            <outlet property="title" destination="oZx-X4-Mud" id="COx-i6-nOM"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
@@ -74,40 +144,52 @@
                                     <outlet property="delegate" destination="JEX-9P-axG" id="C14-Iw-NwO"/>
                                 </connections>
                             </tableView>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3T6-Jm-JLt">
+                                <rect key="frame" x="20" y="256" width="663.5" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="Xqp-SW-xtz"/>
+                                </constraints>
+                                <items>
+                                    <navigationItem title="Tasks" id="RnZ-Zv-ggE">
+                                        <rightBarButtonItems>
+                                            <barButtonItem systemItem="add" id="4VX-9W-Txp">
+                                                <connections>
+                                                    <segue destination="eAs-sI-Y6I" kind="popoverPresentation" identifier="addTask" popoverAnchorBarButtonItem="4VX-9W-Txp" id="Rxa-Wg-fuq">
+                                                        <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                                                    </segue>
+                                                </connections>
+                                            </barButtonItem>
+                                            <barButtonItem title="     " id="39G-d2-yEJ"/>
+                                            <barButtonItem systemItem="edit" id="N5G-Xg-6nK">
+                                                <connections>
+                                                    <segue destination="LRO-hx-U1t" kind="popoverPresentation" identifier="editTask" popoverAnchorBarButtonItem="N5G-Xg-6nK" id="KdZ-M9-E5B">
+                                                        <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                                                    </segue>
+                                                </connections>
+                                            </barButtonItem>
+                                        </rightBarButtonItems>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="RdK-LC-w1s" firstAttribute="top" secondItem="4aC-uD-Kil" secondAttribute="bottom" constant="16" id="1Wa-gX-q5F"/>
                             <constraint firstItem="4aC-uD-Kil" firstAttribute="top" secondItem="VUw-jc-0yf" secondAttribute="top" id="2XP-3s-l7l"/>
                             <constraint firstItem="4aC-uD-Kil" firstAttribute="leading" secondItem="RdK-LC-w1s" secondAttribute="leading" id="Cdc-XE-xiV"/>
                             <constraint firstItem="VUw-jc-0yf" firstAttribute="bottom" secondItem="RdK-LC-w1s" secondAttribute="bottom" constant="20" id="Lly-pb-sPN"/>
+                            <constraint firstItem="3T6-Jm-JLt" firstAttribute="trailing" secondItem="RdK-LC-w1s" secondAttribute="trailing" id="NqU-Cw-T8H"/>
                             <constraint firstItem="4aC-uD-Kil" firstAttribute="leading" secondItem="svH-Pt-448" secondAttribute="leadingMargin" id="PbK-27-0E7"/>
                             <constraint firstItem="4aC-uD-Kil" firstAttribute="centerX" secondItem="svH-Pt-448" secondAttribute="centerX" id="RrR-NR-a4H"/>
+                            <constraint firstItem="4aC-uD-Kil" firstAttribute="leading" secondItem="3T6-Jm-JLt" secondAttribute="leading" id="Tjx-uW-LCg"/>
                             <constraint firstItem="4aC-uD-Kil" firstAttribute="trailing" secondItem="RdK-LC-w1s" secondAttribute="trailing" id="dGk-8D-sxT"/>
+                            <constraint firstItem="RdK-LC-w1s" firstAttribute="top" secondItem="3T6-Jm-JLt" secondAttribute="bottom" constant="11" id="nQZ-K5-7Lq"/>
+                            <constraint firstItem="3T6-Jm-JLt" firstAttribute="top" secondItem="4aC-uD-Kil" secondAttribute="bottom" id="zs6-C0-nRO"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="VUw-jc-0yf"/>
                     </view>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Assessment Summary" id="mOI-FS-AaM">
-                        <rightBarButtonItems>
-                            <barButtonItem systemItem="add" id="4VX-9W-Txp">
-                                <connections>
-                                    <segue destination="eAs-sI-Y6I" kind="popoverPresentation" identifier="addTask" popoverAnchorBarButtonItem="4VX-9W-Txp" id="Rxa-Wg-fuq">
-                                        <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
-                                    </segue>
-                                </connections>
-                            </barButtonItem>
-                            <barButtonItem title="     " id="39G-d2-yEJ"/>
-                            <barButtonItem systemItem="edit" id="N5G-Xg-6nK">
-                                <connections>
-                                    <segue destination="LRO-hx-U1t" kind="popoverPresentation" identifier="editTask" popoverAnchorBarButtonItem="N5G-Xg-6nK" id="KdZ-M9-E5B">
-                                        <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
-                                    </segue>
-                                </connections>
-                            </barButtonItem>
-                            <barButtonItem title="     " id="28d-ga-kmb"/>
-                            <barButtonItem systemItem="trash" id="uul-mg-NVz"/>
-                        </rightBarButtonItems>
+                        <barButtonItem key="rightBarButtonItem" title="     " id="28d-ga-kmb"/>
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="RdK-LC-w1s" id="Prq-FR-tht"/>
@@ -140,25 +222,25 @@
                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Module: " textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="foS-TZ-5OD">
-                                <rect key="frame" x="20" y="20" width="208.5" height="39"/>
+                                <rect key="frame" x="20" y="20" width="189" height="39"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="39" id="vKR-46-atc"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
+                                <fontDescription key="fontDescription" name="BodoniSvtyTwoITCTT-Book" family="Bodoni 72" pointSize="20"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Mathematics" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="te9-Ig-Bmq">
                                 <rect key="frame" x="247" y="22" width="377" height="34"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <fontDescription key="fontDescription" name="BodoniSvtyTwoITCTT-Book" family="Bodoni 72" pointSize="17"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Assessment:" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lhR-0G-lq6">
-                                <rect key="frame" x="116" y="70" width="112.5" height="28"/>
+                                <rect key="frame" x="116" y="70" width="93" height="28"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="28" id="d1P-ft-VSI"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
+                                <fontDescription key="fontDescription" name="BodoniSvtyTwoITCTT-Book" family="Bodoni 72" pointSize="20"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -167,21 +249,21 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="34" id="oUg-Nh-7Xd"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <fontDescription key="fontDescription" name="BodoniSvtyTwoITCTT-Book" family="Bodoni 72" pointSize="17"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Value %:" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cWU-UE-tQI">
-                                <rect key="frame" x="20" y="109" width="208.5" height="39"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="       Value %:" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cWU-UE-tQI">
+                                <rect key="frame" x="20" y="109" width="189" height="39"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="39" id="Oux-pg-DiW"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
+                                <fontDescription key="fontDescription" name="BodoniSvtyTwoITCTT-Book" family="Bodoni 72" pointSize="20"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="50" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Jbr-nf-uPQ">
                                 <rect key="frame" x="247" y="110" width="377" height="34"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <fontDescription key="fontDescription" name="BodoniSvtyTwoITCTT-Book" family="Bodoni 72" pointSize="17"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Notes" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="oGd-tK-1jC">
@@ -189,7 +271,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="34" id="CYc-qs-dYB"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <fontDescription key="fontDescription" name="BodoniSvtyTwoITCTT-Book" family="Bodoni 72" pointSize="17"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add To Calendar" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="djr-yd-pdQ">
@@ -197,7 +279,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="27" id="jZa-9q-1XQ"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
+                                <fontDescription key="fontDescription" name="BodoniSvtyTwoITCTT-Book" family="Bodoni 72" pointSize="20"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -209,7 +291,7 @@
                             </switch>
                             <textField opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="97" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8mr-S1-FSb">
                                 <rect key="frame" x="245" y="206" width="379" height="34"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <fontDescription key="fontDescription" name="BodoniSvtyTwoITCTT-Book" family="Bodoni 72" pointSize="17"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mark Achieved %:" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vft-aR-p2z">
@@ -218,7 +300,7 @@
                                     <constraint firstAttribute="height" constant="39" id="nd8-uT-tJU"/>
                                     <constraint firstAttribute="width" constant="217" id="zLH-pc-iI2"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
+                                <fontDescription key="fontDescription" name="BodoniSvtyTwoITCTT-Book" family="Bodoni 72" pointSize="20"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -385,56 +467,56 @@
                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Module: " textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DcT-U4-iPF">
-                                <rect key="frame" x="20" y="20" width="208.5" height="39"/>
+                                <rect key="frame" x="20" y="20" width="189" height="39"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="39" id="ZUB-3F-CPP"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
+                                <fontDescription key="fontDescription" name="BodoniSvtyTwoITCTT-Book" family="Bodoni 72" pointSize="20"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Mathematics" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="6sR-rz-tYq">
+                            <textField opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="6sR-rz-tYq">
                                 <rect key="frame" x="247" y="22" width="377" height="34"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <fontDescription key="fontDescription" name="BodoniSvtyTwoITCTT-Book" family="Bodoni 72" pointSize="17"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Assessment:" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pt1-2Z-m8B">
-                                <rect key="frame" x="116" y="70" width="112.5" height="28"/>
+                                <rect key="frame" x="116" y="70" width="93" height="28"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="28" id="zH0-PN-FgT"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
+                                <fontDescription key="fontDescription" name="BodoniSvtyTwoITCTT-Book" family="Bodoni 72" pointSize="20"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Exam" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="447-hO-zdd">
+                            <textField opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="447-hO-zdd">
                                 <rect key="frame" x="247" y="66" width="377" height="34"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="34" id="PdV-0l-pjO"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <fontDescription key="fontDescription" name="BodoniSvtyTwoITCTT-Book" family="Bodoni 72" pointSize="17"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Value %:" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Osm-ht-CId">
-                                <rect key="frame" x="20" y="109" width="208.5" height="39"/>
+                                <rect key="frame" x="20" y="109" width="189" height="39"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="39" id="h2m-26-vKb"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
+                                <fontDescription key="fontDescription" name="BodoniSvtyTwoITCTT-Book" family="Bodoni 72" pointSize="20"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="50" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="JFx-Zf-5dD">
+                            <textField opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="JFx-Zf-5dD">
                                 <rect key="frame" x="247" y="110" width="377" height="34"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <fontDescription key="fontDescription" name="BodoniSvtyTwoITCTT-Book" family="Bodoni 72" pointSize="17"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Notes" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="yxI-A4-i3a">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="yxI-A4-i3a">
                                 <rect key="frame" x="20" y="156" width="604" height="34"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="34" id="3eH-5P-9K1"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <fontDescription key="fontDescription" name="BodoniSvtyTwoITCTT-Book" family="Bodoni 72" pointSize="17"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add To Calendar" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RL3-w3-GjQ">
@@ -442,7 +524,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="27" id="6Vh-kp-fBE"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
+                                <fontDescription key="fontDescription" name="BodoniSvtyTwoITCTT-Book" family="Bodoni 72" pointSize="20"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -452,9 +534,9 @@
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Z94-QZ-CZG">
                                 <rect key="frame" x="575" y="251" width="51" height="31"/>
                             </switch>
-                            <textField opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="97" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cXO-iU-hHa">
+                            <textField opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cXO-iU-hHa">
                                 <rect key="frame" x="245" y="206" width="379" height="34"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <fontDescription key="fontDescription" name="BodoniSvtyTwoITCTT-Book" family="Bodoni 72" pointSize="17"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mark Achieved %:" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Rb-tP-3it">
@@ -463,7 +545,7 @@
                                     <constraint firstAttribute="height" constant="39" id="4Q3-Ge-czs"/>
                                     <constraint firstAttribute="width" constant="217" id="TTx-Ih-FXw"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
+                                <fontDescription key="fontDescription" name="BodoniSvtyTwoITCTT-Book" family="Bodoni 72" pointSize="20"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -561,7 +643,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="X4E-wD-CFZ"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                                <fontDescription key="fontDescription" name="NotoSansKannada-Regular" family="Noto Sans Kannada" pointSize="28"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -578,32 +660,32 @@
                                 </constraints>
                             </progressView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="75 % Complete" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U3w-Tn-g0w">
-                                <rect key="frame" x="20" y="68" width="289" height="21"/>
+                                <rect key="frame" x="20" y="68" width="289" height="23"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="289" id="mz7-Qm-FvY"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <fontDescription key="fontDescription" name="NotoSansKannada-Regular" family="Noto Sans Kannada" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3 Days Left" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="78i-Rd-sUg">
-                                <rect key="frame" x="317" y="68" width="326.5" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <rect key="frame" x="317" y="68" width="326.5" height="23"/>
+                                <fontDescription key="fontDescription" name="NotoSansKannada-Regular" family="Noto Sans Kannada" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Coursework 1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GwQ-F2-Aav">
-                                <rect key="frame" x="20" y="97" width="623.5" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <rect key="frame" x="20" y="99" width="623.5" height="23"/>
+                                <fontDescription key="fontDescription" name="NotoSansKannada-Regular" family="Noto Sans Kannada" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="G0G-YW-OMn">
-                                <rect key="frame" x="20" y="126" width="623.5" height="60"/>
+                                <rect key="frame" x="20" y="130" width="623.5" height="56"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                 <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <fontDescription key="fontDescription" name="NotoSansKannada-Regular" family="Noto Sans Kannada" pointSize="17"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                         </subviews>
@@ -793,7 +875,7 @@
                                 <constraints>
                                     <constraint firstAttribute="width" constant="172" id="HYQ-dI-hRP"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
+                                <fontDescription key="fontDescription" name="NotoSansKannada-Regular" family="Noto Sans Kannada" pointSize="20"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -809,32 +891,32 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add Notification" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DQz-lR-cE8">
-                                <rect key="frame" x="22" y="245" width="293" height="31"/>
-                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
+                                <rect key="frame" x="22" y="242.5" width="293" height="31"/>
+                                <fontDescription key="fontDescription" name="NotoSansKannada-Regular" family="Noto Sans Kannada" pointSize="20"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="u86-NU-uqk">
-                                <rect key="frame" x="323" y="245" width="59" height="31"/>
+                                <rect key="frame" x="323" y="242.5" width="51" height="31"/>
                             </switch>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="% complete " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ECf-ed-xTJ">
-                                <rect key="frame" x="24" y="321" width="358" height="18"/>
-                                <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                                <rect key="frame" x="24" y="318.5" width="358" height="20.5"/>
+                                <fontDescription key="fontDescription" name="NotoSansKannada-Regular" family="Noto Sans Kannada" pointSize="15"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="9y5-vb-CFH">
-                                <rect key="frame" x="20" y="284" width="362" height="30"/>
+                                <rect key="frame" x="20" y="281.5" width="362" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="29" id="Hig-kb-BFn"/>
                                 </constraints>
                             </slider>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Vn6-Rz-mr4">
-                                <rect key="frame" x="20" y="99" width="360" height="138"/>
+                                <rect key="frame" x="20" y="99" width="360" height="135.5"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                 <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <fontDescription key="fontDescription" name="NotoSansKannada-Regular" family="Noto Sans Kannada" pointSize="17"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="             Due Date" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VP2-QC-UPP">

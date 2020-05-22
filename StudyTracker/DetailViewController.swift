@@ -9,10 +9,21 @@
 import UIKit
 import CoreData
 
-class DetailViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate  {
+//@@@@@@@@@@@@@@@@@@
+// Taken from user Frankie at https://stackoverflow.com/users/2047476/frankie
+//https://stackoverflow.com/questions/31390466/swift-how-to-remove-a-decimal-from-a-float-if-the-decimal-is-equal-to-0
+extension Float {
+    var clean: String {
+        return self.truncatingRemainder(dividingBy: 1) == 0 ? String(format: "%.0f", self) : String(self)
+    }
+}
+//@@@@@@@@@@@@@@@@@
 
+class DetailViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate  {
+    
     @IBOutlet weak var detailDescriptionLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
+    
     
     let cellColour:UIColor = UIColor(red: 0.0, green: 1.0, blue: 0.0, alpha: 0.1)
     let cellSelColour:UIColor = UIColor(red: 0.0, green: 1.0, blue: 0.0, alpha: 0.2)
@@ -24,24 +35,74 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
         self.tableView.dataSource = self
         // Do any additional setup after loading the view.
         configureView()
+        
+        // selecting first cell programatically
+        
+        //let index = NSIndexPath(row: 0, section: 0)
+        //self.tableView.selectRow(at: index as IndexPath, animated: true, scrollPosition: UITableView.ScrollPosition.middle)
+        
+        
     }
     
     
     // MARK: - CONFIGURE the cell
     func configureCell (_ cell: UITableViewCell, indexPath: IndexPath){
-           let title = self.fetchedResultsController.fetchedObjects?[indexPath.row].title
-           cell.textLabel?.text = title
-           cell.backgroundColor = cellColour
+        //get the cell that is passed to this function as custom cell
+        let cell = cell as! CustomTableViewCell
+        
+        // 0. retrieve the fetched object
+        let fetchedTask = self.fetchedResultsController.fetchedObjects?[indexPath.row]
+        
+        // 1. set title and notes
+        cell.title.text = fetchedTask?.title
+        cell.notes.text = fetchedTask?.notes
+        
+        //2. progress bar - get percentage, round it and clean floating point
+        cell.progressBarPercentLeft.progress = fetchedTask?.progress ?? 0.0
+        let percentCompleted = round((fetchedTask?.progress ?? 0.0) * 100);
+        cell.percentCompleted.text = String(percentCompleted.clean) + " %"
+        
+        //3. count daysLeft and progressBar
+        //3.1 set daysLeft label
+        let dateNow = Date()
+        let dateDue = fetchedTask?.taskDueDate
+        let dateWhenSet = fetchedTask?.startDate
+        let timeLeft: [Int] = absDayAndHourBetweenTwoDates(dateNow, dateDue!)
+        let hoursLeft = timeLeft[1]%24
+        let daysLeft = timeLeft[0]
+        let timeLeftStr: String = " \(daysLeft)D, \(hoursLeft)Hrs"
+        
+        cell.daysLeft.text = timeLeftStr
+        
+        //3.2 set daysLeft progress bar
+        // days left progress bar looks into  1 - (Ratio of DateNow and DateDue)
+        let currentProgress = timeLeft[1]
+        
+        // This is displaying diff between date due and date now!!! TODO
+        // MAX PROGRESS is 1 - (RATIO in hrs of dateWhenSet of assessment AND dueTime)
+        let maxProgress: Int =  absHoursBetweenTwoDates(dateWhenSet!, dateDue!)
+        let progressRatioReversed = Float(1 - (Float(currentProgress) / Float(maxProgress)))
+        
+        cell.progressBarDaysLeft.progress = progressRatioReversed
+        
+        
+        
+        // 4. Set cell indexes
+        cell.cellNo.text = "Task " + String(indexPath.row+1)
+        
+        // 5. Set cell notes
         if let taskNotes =  self.fetchedResultsController.fetchedObjects?[indexPath.row].notes {
-               cell.detailTextLabel?.text = taskNotes
-           }
-           else {
-               cell.detailTextLabel?.text = ""
-           }
-           
-           
-       }
-       
+            cell.detailTextLabel?.text = taskNotes
+        }
+        else {
+            cell.detailTextLabel?.text = ""
+        }
+        // 6. Set cell color
+        cell.backgroundColor = cellColour
+        
+        
+    }
+    
     func numberOfSections( in tableView: UITableView) -> Int {
         return self.fetchedResultsController.sections?.count ?? 0
     }
@@ -55,9 +116,9 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
             }
         }
     }
-
-
-
+    
+    
+    
     var assessment: Assessment? {
         didSet {
             // Update the view.
@@ -81,7 +142,7 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
                 break
             case "editTask":
                 if let indexPath = tableView.indexPathForSelectedRow {
-                   // let context = fetchedResultsController.managedObjectContext
+                    // let context = fetchedResultsController.managedObjectContext
                     let object = fetchedResultsController.object(at: indexPath)
                     let assessment = self.assessment
                     let controller = segue.destination as! EditTaskViewController
@@ -92,10 +153,8 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
             default:
                 break
             }
-            
-                
         }
-    
+        
     }
     
     
@@ -114,7 +173,7 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
         cell.selectedBackgroundView = backgroundView
         return cell
     }
-
+    
     
     
     
@@ -160,15 +219,15 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
         do {
             try _fetchedResultsController!.performFetch()
         } catch {
-             // Replace this implementation with code to handle the error appropriately.
-             // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-             let nserror = error as NSError
-             fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
+            // Replace this implementation with code to handle the error appropriately.
+            // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+            let nserror = error as NSError
+            fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
         }
         
         return _fetchedResultsController!
     }
-
+    
     
     
     
@@ -176,45 +235,45 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
     
     // MARK: - TABLE EDITING
     func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-          tableView.beginUpdates()
-      }
-
+        tableView.beginUpdates()
+    }
+    
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         tableView.endUpdates()
     }
-
-      func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange sectionInfo: NSFetchedResultsSectionInfo, atSectionIndex sectionIndex: Int, for type: NSFetchedResultsChangeType) {
-          switch type {
-              case .insert:
-                  tableView.insertSections(IndexSet(integer: sectionIndex), with: .fade)
-              case .delete:
-                  tableView.deleteSections(IndexSet(integer: sectionIndex), with: .fade)
-              default:
-                  return
-          }
-      }
-
-      func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
-          switch type {
-              case .insert:
-                  tableView.insertRows(at: [newIndexPath!], with: .fade)
-              case .delete:
-                  tableView.deleteRows(at: [indexPath!], with: .fade)
-              case .update:
-                self.configureCell(tableView.cellForRow(at: indexPath!)!, indexPath: newIndexPath!)
-              case .move:
-                self.configureCell(tableView.cellForRow(at: indexPath!)!, indexPath: newIndexPath!)
-                  tableView.moveRow(at: indexPath!, to: newIndexPath!)
-              default:
-                  return
-          }
-      }
+    
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange sectionInfo: NSFetchedResultsSectionInfo, atSectionIndex sectionIndex: Int, for type: NSFetchedResultsChangeType) {
+        switch type {
+        case .insert:
+            tableView.insertSections(IndexSet(integer: sectionIndex), with: .fade)
+        case .delete:
+            tableView.deleteSections(IndexSet(integer: sectionIndex), with: .fade)
+        default:
+            return
+        }
+    }
+    
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+        switch type {
+        case .insert:
+            tableView.insertRows(at: [newIndexPath!], with: .fade)
+        case .delete:
+            tableView.deleteRows(at: [indexPath!], with: .fade)
+        case .update:
+            self.configureCell(tableView.cellForRow(at: indexPath!)!, indexPath: newIndexPath!)
+        case .move:
+            self.configureCell(tableView.cellForRow(at: indexPath!)!, indexPath: newIndexPath!)
+            tableView.moveRow(at: indexPath!, to: newIndexPath!)
+        default:
+            return
+        }
+    }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             let context = fetchedResultsController.managedObjectContext
             context.delete(fetchedResultsController.object(at: indexPath))
-                
+            
             do {
                 try context.save()
             } catch {
@@ -228,6 +287,6 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
     
     
     
-
+    
 }
 

@@ -23,6 +23,10 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
             let controllers = split.viewControllers
             detailViewController = (controllers[controllers.count-1] as! UINavigationController).topViewController as? DetailViewController
         }
+        
+        // selecting first cell programatically
+       // let index = NSIndexPath(row: 0, section: 0)
+      //  self.tableView.selectRow(at: index as IndexPath, animated: true, scrollPosition: UITableView.ScrollPosition.middle)
     }
 
     override func viewWillAppear(_ animated: Bool) {
