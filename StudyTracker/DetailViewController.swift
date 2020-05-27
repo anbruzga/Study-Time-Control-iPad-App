@@ -23,6 +23,8 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
     
     @IBOutlet weak var detailDescriptionLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var editTaskButton: UIBarButtonItem!
+    @IBOutlet weak var addTaskButton: UIBarButtonItem!
     
     
     let cellColour:UIColor = UIColor(red: 0.0, green: 1.0, blue: 0.0, alpha: 0.1)
@@ -36,12 +38,32 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
         // Do any additional setup after loading the view.
         configureView()
         
-        // selecting first cell programatically
+        // disables editTask button if no tasks are present
+        //if (numberOfSections(in: tableView) > 0){
+        //    editTaskButton.isEnabled = true
+        //}
         
-        //let index = NSIndexPath(row: 0, section: 0)
-        //self.tableView.selectRow(at: index as IndexPath, animated: true, scrollPosition: UITableView.ScrollPosition.middle)
+        // disables addTaskButton if no assesment is selected
+        if assessment == nil {
+            editTaskButton.isEnabled = false
+            addTaskButton.isEnabled = false
+        }
+        else {
+            addTaskButton.isEnabled = true
+        }
         
+        NotificationCenter.default.addObserver(self, selector: #selector(disableEditTaskDueLostFocus), name: NSNotification.Name(rawValue: "disableEditTaskDueLostFocus"), object: nil)
         
+        //Reset the avgProgress on reloading view
+        AvgProgress.reset()
+        
+    }
+    @objc func disableEditTaskDueLostFocus(){
+        editTaskButton.isEnabled = false
+    }
+    override func viewDidDisappear(_ animated: Bool) {
+        editTaskButton.isEnabled = false
+        addTaskButton.isEnabled = false
     }
     
     
@@ -100,7 +122,12 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
         // 6. Set cell color
         cell.backgroundColor = cellColour
         
-        
+        // 7. count avg
+        AvgProgress.add(cell.progressBarPercentLeft.progress)
+        let rowsNum = self.tableView.numberOfRows(inSection: 0)
+        if (AvgProgress.getMembers() == rowsNum){
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "reloadPercentCompletedProgressBar"), object: nil)
+        }
     }
     
     func numberOfSections( in tableView: UITableView) -> Int {
@@ -114,8 +141,11 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
             if let label = detailDescriptionLabel { // todo is this needed??
                 label.text = assessment.moduleName
             }
+            
         }
+        
     }
+    
     
     
     
@@ -134,6 +164,7 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
             case "assessmentSummary":
                 let destVC = segue.destination as! AssessmentSummaryViewController
                 destVC.currentAssessment = self.assessment
+                
                 break
             case "addTask":
                 let object = self.assessment
@@ -171,6 +202,7 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
         let backgroundView = UIView()
         backgroundView.backgroundColor = cellSelColour
         cell.selectedBackgroundView = backgroundView
+        
         return cell
     }
     
@@ -200,8 +232,9 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
             fetchRequest.predicate = predicate
         }
         else {
-            // force programamtic seleciton to the first line? TODO
-            let predicate = NSPredicate(format: "assessment = %@",  "Pink Floyd")
+            // force programamtic seleciton to the first line?
+            // Instead, impossible predicate given, hack..
+            let predicate = NSPredicate(format: "assessment = %@",  "")
             fetchRequest.predicate = predicate
         }
         
@@ -240,40 +273,72 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
     
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         tableView.endUpdates()
+        notifyAboutProgressUpdate()
     }
     
     func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange sectionInfo: NSFetchedResultsSectionInfo, atSectionIndex sectionIndex: Int, for type: NSFetchedResultsChangeType) {
         switch type {
         case .insert:
             tableView.insertSections(IndexSet(integer: sectionIndex), with: .fade)
+            
+            
         case .delete:
             tableView.deleteSections(IndexSet(integer: sectionIndex), with: .fade)
+            editTaskButton.isEnabled = false
         default:
             return
         }
     }
     
+    //Change summary when new task is inserted - progress bars
     func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
         switch type {
         case .insert:
             tableView.insertRows(at: [newIndexPath!], with: .fade)
         case .delete:
             tableView.deleteRows(at: [indexPath!], with: .fade)
+            editTaskButton.isEnabled = false
         case .update:
             self.configureCell(tableView.cellForRow(at: indexPath!)!, indexPath: newIndexPath!)
+            editTaskButton.isEnabled = false
         case .move:
             self.configureCell(tableView.cellForRow(at: indexPath!)!, indexPath: newIndexPath!)
             tableView.moveRow(at: indexPath!, to: newIndexPath!)
+            
         default:
             return
         }
+        
+    }
+    
+    func notifyAboutProgressUpdate(){
+        if (self.tableView.numberOfSections < 1){
+            AvgProgress.reset()
+        }
+        else{
+            // @@@@@@@@@@@@@@@@@@@@@@@@
+            // REFERENCE FROM: https://stackoverflow.com/questions/30281451/iterate-over-all-the-uitablecells-given-a-section-id
+            // User Steve at https://stackoverflow.com/users/5553768/steve
+            
+            AvgProgress.reset()
+            for section in 0...self.tableView.numberOfSections - 1 {
+                for row in 0...self.tableView.numberOfRows(inSection: section) - 1 {
+                    let cell: CustomTableViewCell = self.tableView.cellForRow(at: NSIndexPath(row: row, section: section) as IndexPath) as! CustomTableViewCell
+                    
+                    //print("Section: \(section)  Row: \(row)")
+                // @@@@@@@@@@@@@@@@@@@@@@@@
+                    AvgProgress.add(cell.progressBarPercentLeft.progress)
+                }
+            }
+        }
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "reloadPercentCompletedProgressBar"), object: nil)
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             let context = fetchedResultsController.managedObjectContext
             context.delete(fetchedResultsController.object(at: indexPath))
-            
+            editTaskButton.isEnabled = false
             do {
                 try context.save()
             } catch {
@@ -286,7 +351,17 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
     }
     
     
+    // Disabling and enabling buttons according to what cell is selected
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print("Selected cell number: \(indexPath.row) ")
+        editTaskButton.isEnabled = true
+    }
     
+    func tableView(_ tableView: UITableView,
+                   didDeselectRowAt indexPath: IndexPath) {
+        editTaskButton.isEnabled = false
+    }
+
     
 }
 

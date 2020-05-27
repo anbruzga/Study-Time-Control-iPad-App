@@ -11,7 +11,7 @@ import UIKit
 class AddTaskViewController: UIViewController {
 
     @IBOutlet weak var labelTaskName: UITextField!
-    @IBOutlet weak var textViewNotes: UITextView!
+    @IBOutlet weak var labelNotes: UITextField!
     @IBOutlet weak var switchAddNotification: UISwitch!
     @IBOutlet weak var sliderProgress: UISlider!
     @IBOutlet weak var datePicker: UIDatePicker!
@@ -21,6 +21,7 @@ class AddTaskViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        labelNotes.text = ""
         
         // Do any additional setup after loading the view.
     }
@@ -33,7 +34,7 @@ class AddTaskViewController: UIViewController {
             newTask.assessment = currentAssessment?.moduleName
             newTask.isReminderSet = switchAddNotification.isOn
             
-            if let notes = textViewNotes?.text {
+            if let notes = labelNotes?.text {
                 newTask.notes = notes
             }
             newTask.progress = sliderProgress.value

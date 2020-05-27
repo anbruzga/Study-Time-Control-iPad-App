@@ -12,7 +12,7 @@ class EditTaskViewController: UIViewController {
     
     let context = (UIApplication.shared.delegate as!AppDelegate).persistentContainer.viewContext
     @IBOutlet weak var labelTaskName: UITextField!
-    @IBOutlet weak var textViewNotes: UITextView!
+    @IBOutlet weak var labelNotes: UITextField!
     @IBOutlet weak var switchAddNotif: UISwitch!
     @IBOutlet weak var sliderProgress: UISlider!
     @IBOutlet weak var datePicker: UIDatePicker!
@@ -22,7 +22,7 @@ class EditTaskViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         labelTaskName.text = currentTask?.title
-        textViewNotes.text = currentTask?.notes
+        labelNotes.text = currentTask?.notes
         //todo rethink switch on and of. Will kind of encourage duplicates in calendar
         switchAddNotif.setOn(currentTask?.isReminderSet ?? false, animated: false)
         sliderProgress.setValue(currentTask?.progress ?? 0.0 , animated: false)
@@ -31,11 +31,12 @@ class EditTaskViewController: UIViewController {
     }
     
 
+
     @IBAction func updateTask(_ sender: UIButton) {
         currentTask?.title = labelTaskName.text
         currentTask?.assessment = currentAssessment?.moduleName
         currentTask?.isReminderSet = switchAddNotif.isOn
-        currentTask?.notes = textViewNotes.text
+        currentTask?.notes = labelNotes.text
         currentTask?.progress = sliderProgress.value
         currentTask?.taskDueDate = datePicker.date
         

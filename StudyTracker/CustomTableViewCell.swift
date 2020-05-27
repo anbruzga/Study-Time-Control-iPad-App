@@ -26,6 +26,7 @@ class CustomTableViewCell: UITableViewCell {
     public var progressBarDaysLeftStr: String = ""
     public var daysLeftStr: String = ""
   
+
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

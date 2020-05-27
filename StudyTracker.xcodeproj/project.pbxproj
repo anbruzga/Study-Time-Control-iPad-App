@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B900368324797F0000FDC4B1 /* AvgProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = B900368224797F0000FDC4B1 /* AvgProgress.swift */; };
 		B92C314D24756FAF00AC2726 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B92C314C24756FAF00AC2726 /* AppDelegate.swift */; };
 		B92C315024756FAF00AC2726 /* StudyTracker.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B92C314E24756FAF00AC2726 /* StudyTracker.xcdatamodeld */; };
 		B92C315224756FAF00AC2726 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B92C315124756FAF00AC2726 /* SceneDelegate.swift */; };
@@ -36,6 +37,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		B900368224797F0000FDC4B1 /* AvgProgress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvgProgress.swift; sourceTree = "<group>"; };
 		B92C314924756FAF00AC2726 /* StudyTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StudyTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B92C314C24756FAF00AC2726 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B92C314F24756FAF00AC2726 /* StudyTracker.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = StudyTracker.xcdatamodel; sourceTree = "<group>"; };
@@ -113,6 +115,7 @@
 				B9E5E7542476BF560056DB90 /* EditTaskViewController.swift */,
 				B9E5E7B124782AE50056DB90 /* CustomTableViewCell.swift */,
 				B9E5E7B3247838E80056DB90 /* DateUtils.swift */,
+				B900368224797F0000FDC4B1 /* AvgProgress.swift */,
 			);
 			path = StudyTracker;
 			sourceTree = "<group>";
@@ -233,6 +236,7 @@
 				B9E5E7B224782AE50056DB90 /* CustomTableViewCell.swift in Sources */,
 				B92C315624756FAF00AC2726 /* DetailViewController.swift in Sources */,
 				B92C31882476A41E00AC2726 /* AssessmentSummaryViewController.swift in Sources */,
+				B900368324797F0000FDC4B1 /* AvgProgress.swift in Sources */,
 				B92C314D24756FAF00AC2726 /* AppDelegate.swift in Sources */,
 				B92C317C2475901100AC2726 /* AddAssessmentViewController.swift in Sources */,
 				B92C317E2475902300AC2726 /* EditAssessmentViewController.swift in Sources */,
