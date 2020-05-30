@@ -20,6 +20,8 @@
 		B92C317C2475901100AC2726 /* AddAssessmentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B92C317B2475901100AC2726 /* AddAssessmentViewController.swift */; };
 		B92C317E2475902300AC2726 /* EditAssessmentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B92C317D2475902300AC2726 /* EditAssessmentViewController.swift */; };
 		B92C31882476A41E00AC2726 /* AssessmentSummaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B92C31872476A41E00AC2726 /* AssessmentSummaryViewController.swift */; };
+		B930CAC9247F253B00F84B29 /* LinearProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = B930CAC8247F253B00F84B29 /* LinearProgressBar.swift */; };
+		B930CACD248007AE00F84B29 /* EventsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B930CACC248007AE00F84B29 /* EventsController.swift */; };
 		B9E5E7532476BF370056DB90 /* AddTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9E5E7522476BF370056DB90 /* AddTaskViewController.swift */; };
 		B9E5E7552476BF560056DB90 /* EditTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9E5E7542476BF560056DB90 /* EditTaskViewController.swift */; };
 		B9E5E7B224782AE50056DB90 /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9E5E7B124782AE50056DB90 /* CustomTableViewCell.swift */; };
@@ -54,6 +56,8 @@
 		B92C317B2475901100AC2726 /* AddAssessmentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAssessmentViewController.swift; sourceTree = "<group>"; };
 		B92C317D2475902300AC2726 /* EditAssessmentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditAssessmentViewController.swift; sourceTree = "<group>"; };
 		B92C31872476A41E00AC2726 /* AssessmentSummaryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssessmentSummaryViewController.swift; sourceTree = "<group>"; };
+		B930CAC8247F253B00F84B29 /* LinearProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinearProgressBar.swift; sourceTree = "<group>"; };
+		B930CACC248007AE00F84B29 /* EventsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsController.swift; sourceTree = "<group>"; };
 		B9E5E7522476BF370056DB90 /* AddTaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTaskViewController.swift; sourceTree = "<group>"; };
 		B9E5E7542476BF560056DB90 /* EditTaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTaskViewController.swift; sourceTree = "<group>"; };
 		B9E5E7B124782AE50056DB90 /* CustomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
@@ -116,6 +120,8 @@
 				B9E5E7B124782AE50056DB90 /* CustomTableViewCell.swift */,
 				B9E5E7B3247838E80056DB90 /* DateUtils.swift */,
 				B900368224797F0000FDC4B1 /* AvgProgress.swift */,
+				B930CAC8247F253B00F84B29 /* LinearProgressBar.swift */,
+				B930CACC248007AE00F84B29 /* EventsController.swift */,
 			);
 			path = StudyTracker;
 			sourceTree = "<group>";
@@ -233,11 +239,13 @@
 				B92C315424756FAF00AC2726 /* MasterViewController.swift in Sources */,
 				B9E5E7B4247838E80056DB90 /* DateUtils.swift in Sources */,
 				B92C315024756FAF00AC2726 /* StudyTracker.xcdatamodeld in Sources */,
+				B930CAC9247F253B00F84B29 /* LinearProgressBar.swift in Sources */,
 				B9E5E7B224782AE50056DB90 /* CustomTableViewCell.swift in Sources */,
 				B92C315624756FAF00AC2726 /* DetailViewController.swift in Sources */,
 				B92C31882476A41E00AC2726 /* AssessmentSummaryViewController.swift in Sources */,
 				B900368324797F0000FDC4B1 /* AvgProgress.swift in Sources */,
 				B92C314D24756FAF00AC2726 /* AppDelegate.swift in Sources */,
+				B930CACD248007AE00F84B29 /* EventsController.swift in Sources */,
 				B92C317C2475901100AC2726 /* AddAssessmentViewController.swift in Sources */,
 				B92C317E2475902300AC2726 /* EditAssessmentViewController.swift in Sources */,
 				B9E5E7552476BF560056DB90 /* EditTaskViewController.swift in Sources */,
@@ -334,7 +342,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -388,7 +396,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -404,6 +412,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = StudyTracker/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -422,6 +431,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = StudyTracker/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

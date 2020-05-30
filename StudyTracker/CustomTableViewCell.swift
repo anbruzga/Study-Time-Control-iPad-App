@@ -18,6 +18,7 @@ class CustomTableViewCell: UITableViewCell {
     @IBOutlet weak var progressBarDaysLeft: UIProgressView!
     @IBOutlet weak var daysLeft: UILabel!
     
+    
     public var cellNoStr: String = ""
     public var titleStr: String = ""
     public var notesStr: String = ""
@@ -27,7 +28,7 @@ class CustomTableViewCell: UITableViewCell {
     public var daysLeftStr: String = ""
   
 
-    override func awakeFromNib() {
+    override func awakeFromNib() { // todo what does it doooo?
         super.awakeFromNib()
         // Initialization code
         cellNo.text = cellNoStr
@@ -37,6 +38,7 @@ class CustomTableViewCell: UITableViewCell {
         //progressBarDaysLeft
         //progressBarPercentLeft
         daysLeft.text = daysLeftStr
+       
         
     }
 

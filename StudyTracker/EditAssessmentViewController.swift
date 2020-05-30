@@ -28,6 +28,8 @@ class EditAssessmentViewController: UIViewController {
         value.text = currentAssessment?.value
         notes.text =  currentAssessment?.notes
         mark.text = currentAssessment?.markAwarded
+        datePicker.date = currentAssessment?.reminderDate ?? Date()
+        
         if (currentAssessment?.isReminderSet.self ?? false){ // if reminder was set, turn switch on
             
             saveToCal.setOn(true, animated: false)
@@ -35,6 +37,7 @@ class EditAssessmentViewController: UIViewController {
         else{
             saveToCal.setOn(false, animated: false)
         }
+        
         
     }
     //todo add guards
@@ -45,17 +48,22 @@ class EditAssessmentViewController: UIViewController {
         currentAssessment?.notes = notes.text
         currentAssessment?.markAwarded = mark.text
         currentAssessment?.isReminderSet = saveToCal.isOn
-        //todo do the reminding thing
+        currentAssessment?.reminderDate = datePicker.date
+        currentAssessment?.dateWhenSet = Date()
+        
+        //set reminder in default reminders application
+        let title = self.module.text! + ": " + self.type.text!
+        if saveToCal.isOn {
+            saveReminder(title: title, notes: self.notes.text ?? "", dateDue: self.datePicker.date, setAlarm: true)
+        }
+        
+        // set event in default events application
+        saveEventToCalendar(title: title, subtitle: "", notes: self.notes.text ?? "", startDate: self.datePicker.date, setAlarm: true)
+        
         (UIApplication.shared.delegate as! AppDelegate).saveContext()
         //close popover
         self.presentingViewController!.dismiss(animated: false, completion: nil)
     }
-    
-    func isDateAndTimePastNow(_ eventStartDate: Date) -> Bool {
-        let currentDateTime = Date()
-        return currentDateTime > eventStartDate
-    }
-    
     
     func showAlert (_ title: String, _ message: String){
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
@@ -63,6 +71,50 @@ class EditAssessmentViewController: UIViewController {
         alert.addAction(OKAction)
         self.present(alert, animated: true, completion: nil)
     }
+    
+ /*   // MARK: - SAVE TO CALENDAR
+    func saveToCalendar(){
+        
+        
+        // checks for bad time
+        let eventStartDate = datePicker.date
+        if isDatePastNow(eventStartDate) {
+            showAlert("Date error!", "Selected date is in the past")
+            return
+        }
+        
+        
+        let eventStore = EKEventStore()
+        
+        eventStore.requestAccess(to: EKEntityType.reminder, completion:
+            {(granted, error) in
+                if (granted) && (error == nil) {
+                    print("granted \(granted)")
+                    print("error \(String(describing: error))")
+                    
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                        let reminder: EKReminder = EKReminder(eventStore: eventStore)
+                        let reminderTitle: String = self.module.text! + " : " + self.type.text!
+                        reminder.title = reminderTitle
+                        reminder.notes = self.notes.text
+                        
+                        let  dueDateComp = dateComponentFromDate(self.currentAssessment!.reminderDate!)
+                        print("DATE: ")
+                        print("\(self.currentAssessment!.reminderDate!.description)")
+                        reminder.dueDateComponents = dueDateComp
+                        reminder.calendar = eventStore.defaultCalendarForNewReminders()
+                        do {
+                            try eventStore.save(reminder, commit: true)
+                            
+                        }catch{
+                            print("Error creating and saving new reminder : \(error)")
+                        }
+                    }
+                }
+        }
+        )
+    }*/
+    
     
     
     /*

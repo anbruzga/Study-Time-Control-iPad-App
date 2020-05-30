@@ -8,6 +8,7 @@
 
 import UIKit
 import EventKitUI
+import EventKit
 
 //@@@@@@@@@@@@@@@@@@@@@@@@
 // taken from https://stackoverflow.com/questions/26545166/how-to-check-is-a-string-or-number
@@ -62,10 +63,18 @@ class AddAssessmentViewController: UIViewController {
             newAssessment.isReminderSet = saveToCal.isOn // save if on
             newAssessment.dateWhenSet = Date()
             
-            //set reminder
+        
+            //set reminder in default reminders application
+            let title = self.module.text! + ": " + self.type.text!
             if saveToCal.isOn {
-                saveToCalendar()
+                saveReminder(title: title, notes: self.notes.text ?? "", dateDue: self.datePicker.date, setAlarm: true)
             }
+            
+            // set event in default events application
+            saveEventToCalendar(title: title, subtitle: "", notes: self.notes.text ?? "", startDate: self.datePicker.date, setAlarm: true)
+            
+            currentAssessment = newAssessment
+            
             
             //savecontext
             (UIApplication.shared.delegate as! AppDelegate).saveContext()
@@ -75,7 +84,7 @@ class AddAssessmentViewController: UIViewController {
         } else{
             showAlert("Missing Data", "Module and Assessment fields must be not empty" )
             return
-           
+            
         }
     }
     // MARK: - VALIDATION
@@ -106,72 +115,55 @@ class AddAssessmentViewController: UIViewController {
     func isNum(_ val: String) -> Bool {
         return (val.lowercased() == val.uppercased() && val.isNumber)
     }
-    
+    /*
     // MARK: - SAVE TO CALENDAR
-    func saveToCalendar(){
+    func saveReminder(){
+        
+        
         // checks for bad time
         let eventStartDate = datePicker.date
-        if isDateAndTimePastNow(eventStartDate) {
+        if isDatePastNow(eventStartDate) {
             showAlert("Date error!", "Selected date is in the past")
             return
         }
         
-        // create event in calendar
-        // @@@@@@@@@@@@@@@@@@@@@@@@@@
-        // Adapted from https://stackoverflow.com/questions/28379603/how-to-add-an-event-in-the-device-calendar-using-swift
-        // answer by user toofani at https://stackoverflow.com/users/1782153/toofani
-        let eventStore : EKEventStore = EKEventStore()
         
-        // 'EKEntityTypeReminder' or 'EKEntityTypeEvent'
+        let eventStore = EKEventStore()
         
-        eventStore.requestAccess(to: .event) { (granted, error) in
-            
-            if (granted) && (error == nil) {
-                print("granted \(granted)")
-                print("error \(error)")
-                
-                let event:EKEvent = EKEvent(eventStore: eventStore)
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                    event.title = "" + self.module.text!  + ": " + self.type.text!
-                    event.startDate = self.datePicker.date
+        eventStore.requestAccess(to: EKEntityType.reminder, completion:
+            {(granted, error) in
+                if (granted) && (error == nil) {
+                    print("granted \(granted)")
+                    print("error \(String(describing: error))")
                     
-                    
-                    event.endDate = self.datePicker.date.addingTimeInterval(3600 as TimeInterval) // todo 3600.. maybe ask the user??
-                    if self.notes.text != "" {
-                        event.notes = self.notes.text!
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                        let reminder: EKReminder = EKReminder(eventStore: eventStore)
+                        let reminderTitle: String = self.module.text! + " : " + self.type.text!
+                        reminder.title = reminderTitle
+                        reminder.notes = self.notes.text
+                        
+                        let  dueDateComp = dateComponentFromDate(self.currentAssessment!.reminderDate!)
+                        print("DATE: ")
+                        print("\(self.currentAssessment!.reminderDate!.description)")
+                        reminder.dueDateComponents = dueDateComp
+                        reminder.calendar = eventStore.defaultCalendarForNewReminders()
+                        //reminder.calendar = eventStore.defaultCalendarForNewEvents
+                        do {
+                            try eventStore.save(reminder, commit: true)
+                            
+                        }catch{
+                            print("Error creating and saving new reminder : \(error)")
+                        }
                     }
-                    else {
-                        event.notes = ""
-                    }
-                    event.calendar = eventStore.defaultCalendarForNewEvents
-                    do {
-                        try eventStore.save(event, span: .thisEvent)
-                    } catch let error as NSError {
-                        print("failed to save event with error : \(error)")
-                        self.showAlert("Saving Failure", "Failed to save event to the calendar. Error:\n  \(error)")
-                    }
-                    print("Saved Event")
-                    
                 }
-                self.showAlert("Event Saved", "Event Saved Successfully")
-            }
-            else{
-                self.showAlert("Saving Failure", "failed to save event with error : \(error) or access not granted")
-                print("failed to save event with error : \(error) or access not granted")
-            }
         }
-        // @@@@@@@@@@@@@@@@@@@@@@@@@@
-        
-        
+        )
     }
+    
+    */
+    
     
     // MARK: - UTILITIES
-    func isDateAndTimePastNow(_ eventStartDate: Date) -> Bool {
-        let currentDateTime = Date()
-        return currentDateTime > eventStartDate
-    }
-    
-    
     func showAlert (_ title: String, _ message: String){
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let OKAction = UIAlertAction(title: "OK", style: .default, handler: nil)
@@ -179,14 +171,5 @@ class AddAssessmentViewController: UIViewController {
         self.present(alert, animated: true, completion: nil)
     }
     
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destination.
-     // Pass the selected object to the new view controller.
-     }
-     */
     
 }

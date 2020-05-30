@@ -65,6 +65,8 @@
 	</array>
 	<key>NSCalendarsUsageDescription</key>
 	<string>StudyTracker would like to access your calender. It is needed to save events.</string>
+	<key>NSRemindersUsageDescription</key>
+	<string>StudyTracker would like to access your calender. It is needed to save reminders.</string>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
 		<string>UIInterfaceOrientationLandscapeLeft</string>

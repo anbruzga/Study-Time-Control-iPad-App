@@ -69,17 +69,17 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
     
     // MARK: - CONFIGURE the cell
     func configureCell (_ cell: UITableViewCell, indexPath: IndexPath){
-        //get the cell that is passed to this function as custom cell
+        // 0. get the cell that is passed to this function as custom cell
         let cell = cell as! CustomTableViewCell
         
-        // 0. retrieve the fetched object
+        // 0.1 retrieve the fetched object
         let fetchedTask = self.fetchedResultsController.fetchedObjects?[indexPath.row]
         
         // 1. set title and notes
         cell.title.text = fetchedTask?.title
         cell.notes.text = fetchedTask?.notes
         
-        //2. progress bar - get percentage, round it and clean floating point
+        //2. progress bar percentage - get percentage, round it and clean floating point
         cell.progressBarPercentLeft.progress = fetchedTask?.progress ?? 0.0
         let percentCompleted = round((fetchedTask?.progress ?? 0.0) * 100);
         cell.percentCompleted.text = String(percentCompleted.clean) + " %"
@@ -97,15 +97,23 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
         cell.daysLeft.text = timeLeftStr
         
         //3.2 set daysLeft progress bar
-        // days left progress bar looks into  1 - (Ratio of DateNow and DateDue)
-        let currentProgress = timeLeft[1]
+        let currentProgress: Int = absMinutesBetweenTwoDates(dateNow, dateWhenSet!)
+        let maxProgress: Int = absMinutesBetweenTwoDates(dateWhenSet!, dateDue!)
         
-        // This is displaying diff between date due and date now!!! TODO
-        // MAX PROGRESS is 1 - (RATIO in hrs of dateWhenSet of assessment AND dueTime)
-        let maxProgress: Int =  absHoursBetweenTwoDates(dateWhenSet!, dateDue!)
-        let progressRatioReversed = Float(1 - (Float(currentProgress) / Float(maxProgress)))
-        
-        cell.progressBarDaysLeft.progress = progressRatioReversed
+        if(maxProgress != 0){ // to avoid division by 0 at all costs
+            // must use float/double arithmetic!!
+            let progressRatio: Float = Float(Float(currentProgress)/Float(maxProgress))
+            cell.progressBarDaysLeft.progress = progressRatio
+
+            print("CELLS CURRENT PROGRESS \(currentProgress)")
+            print("MAX PROGRESS \(maxProgress)")
+            print("PROGRESS RATIO \(progressRatio)")
+        }
+        else{ // can happen if user sets the task at default DateTime
+            print("CELLS MAX PROGRESS IS 0")
+            print("DATE WHEN SET: \(String(describing: dateWhenSet?.description))")
+            print("DATE DUE: \(String(describing: dateDue?.description))")
+        }
         
         
         
@@ -300,7 +308,7 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
             editTaskButton.isEnabled = false
         case .update:
             self.configureCell(tableView.cellForRow(at: indexPath!)!, indexPath: newIndexPath!)
-            editTaskButton.isEnabled = false
+            //editTaskButton.isEnabled = false
         case .move:
             self.configureCell(tableView.cellForRow(at: indexPath!)!, indexPath: newIndexPath!)
             tableView.moveRow(at: indexPath!, to: newIndexPath!)

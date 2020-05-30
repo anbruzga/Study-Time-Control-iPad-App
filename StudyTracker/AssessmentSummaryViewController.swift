@@ -30,9 +30,9 @@ class AssessmentSummaryViewController: UIViewController {
         
         NotificationCenter.default.addObserver(self, selector: #selector(reloadPercentCompleted), name: NSNotification.Name(rawValue: "reloadPercentCompletedProgressBar"), object: nil)
         
-
+        
         initAllFields()
-
+        
         
     }
     @objc func reloadPercentCompleted(notification: NSNotification){
@@ -50,7 +50,7 @@ class AssessmentSummaryViewController: UIViewController {
         progressViewForPercentCompleted.isHidden = true
         labelDaysLeft.text = ""
         labelPercentCompleted.text = ""
- 
+        
     }
     
     @objc func initAllFields(){
@@ -61,52 +61,61 @@ class AssessmentSummaryViewController: UIViewController {
         if currentAssessment == nil {
             progressViewForDaysLeft.isHidden = true
             progressViewForPercentCompleted.isHidden = true
+            
         }
         else {
             progressViewForPercentCompleted.isHidden = false
             progressViewForDaysLeft.isHidden = false
         }
+        
+        if (currentAssessment?.hasTasks?.count ?? 0 <= 0) {
+            progressViewForPercentCompleted.isHidden = true
+        }
+        
+        
     }
     
     func initDaysLeft(){
         if let dateDue = currentAssessment?.reminderDate {
-            var days: String = "0"
-            var hours: String = "0"
             let dateNow = Date()
             
             // if in the past
             if(dateNow > dateDue){
-                labelDaysLeft.text = "Past deadline"
+                labelDaysLeft.text = "Past Deadline"
+                progressViewForDaysLeft.progress = 1.0
+                return
             }
-                // if in a day time - display hours left
-            else if(dateNow.advanced(by: -86400 as TimeInterval) < dateDue) { // advanced by a day
-                let cal = Calendar.current
-                let components = cal.dateComponents([.hour], from: dateNow, to: dateDue)
-                let diff = components.hour!
-                let dateString = "\(diff)"
-                if(Int(dateString)! >= 24 ) { // if >= than day, display in hours and days
-                    hours = String(Int(dateString)! % 24) // hours
-                    days = String(Int(dateString)! / 24) // days
-                    //todo fix grammar
-                    labelDaysLeft.text =  days + " Days " + " and " + hours + " hours left"
-                }
-                else { // else display just hours
-                    labelDaysLeft.text = "" + dateString + " hours left"
+            
+            let minutesDiff: Int = absMinutesBetweenTwoDates(dateNow, dateDue)
+            let describedTimeLeft: String = describeMinutes(minutes: minutesDiff)
+            labelDaysLeft.text = describedTimeLeft
+            
+            
+            // setting up PROGRESS VIEW for days left
+            let dateWhenSet = currentAssessment?.dateWhenSet
+            let currentProgress: Int = absMinutesBetweenTwoDates(dateNow, dateWhenSet!)
+            let maxProgress: Int = absMinutesBetweenTwoDates(dateWhenSet!, dateDue)
+            print("ASSESSMENT: \(String(describing: currentAssessment?.moduleName))")
+            
+            
+            if (maxProgress != 0) { // to avoid division by 0
+                let progressRatio: Float = Float(Float(currentProgress)/Float(maxProgress))
+                self.progressViewForDaysLeft.progress = progressRatio
+                print("Current progress \(currentProgress)")
+                print("Max progress \(maxProgress)")
+                print("Progress ratio \(progressRatio)")
+                
+                if(progressRatio > 1 && labelDaysLeft.text! != "Past deadline"){
+                    print("UNEXPECTED RATIO")
                 }
                 
             }
-            
-            // setting up PROGRESS VIEW for days left
-            let cal = Calendar.current
-            let currentProgress = Int(days)! * 24 + Int(hours)!
-            let components = cal.dateComponents([.hour], from: (currentAssessment?.dateWhenSet)!, to: dateDue)
-            let diff = components.hour!
-            let hoursString = "\(diff)"
-            // This is displaying diff between date due and date now!!! TODO
-            // MAX PROGRESS is 1 - (RATIO in hrs of dateWhenSet of assessment AND dueTime)
-            let maxProgress = Int(hoursString)! //hours in week
-            let progressRatioReversed = Float(1 - (Float(currentProgress) / Float(maxProgress)))
-            progressViewForDaysLeft.progress = Float(progressRatioReversed)
+            else {  // can happen if  dateWhenSet and dateDue is same or has less than one minute difference
+                print("ASSESMENT  MAX PROGRESS IS 0")
+                print("DATE WHEN SET: \(String(describing: dateWhenSet?.description))")
+                print("DATE DUE: \(String(describing: dateDue.description))")
+                self.progressViewForDaysLeft.progress = 1
+            }
             
         }
     }
