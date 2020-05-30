@@ -14,7 +14,7 @@ class CustomTableViewCell: UITableViewCell {
     @IBOutlet weak var title: UILabel!
     @IBOutlet weak var notes: UILabel!
     @IBOutlet weak var percentCompleted: UILabel!
-    @IBOutlet weak var progressBarPercentLeft: UIProgressView!
+    @IBOutlet weak var progressBarPercentLeft: CircularProgressView!
     @IBOutlet weak var progressBarDaysLeft: ProgressBarDaysLeft!
     @IBOutlet weak var daysLeft: UILabel!
     

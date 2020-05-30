@@ -66,6 +66,11 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
         addTaskButton.isEnabled = false
     }
     
+    @objc func animateProgress(){
+        let cP = self.view.viewWithTag(101) as! CircularProgressView
+        cP.setProgressWithAnimation(duration: 1.0, value: 0.7)
+        
+    }
     
     // MARK: - CONFIGURE the cell
     func configureCell (_ cell: UITableViewCell, indexPath: IndexPath){
@@ -81,6 +86,13 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
         
         //2. progress bar percentage - get percentage, round it and clean floating point
         cell.progressBarPercentLeft.progress = fetchedTask?.progress ?? 0.0
+        cell.progressBarPercentLeft.trackColour = UIColor(red: 255/255, green: 255/255, blue: 102/255, alpha: 0.75)
+        cell.progressBarPercentLeft.progressColour = UIColor(red: 255/255, green: 69/255, blue: 147/255, alpha: 0.75)
+        
+        cell.progressBarPercentLeft.tag = 101
+        cell.progressBarPercentLeft.setProgressWithAnimation(duration: 1.0, value: fetchedTask?.progress ?? 0.0)
+        
+        
         let percentCompleted = round((fetchedTask?.progress ?? 0.0) * 100);
         cell.percentCompleted.text = String(percentCompleted.clean) + " %"
         

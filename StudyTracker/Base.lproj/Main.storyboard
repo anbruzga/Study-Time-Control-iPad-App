@@ -69,71 +69,69 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="60%" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0Wl-hb-frA">
-                                                    <rect key="frame" x="607" y="54" width="35" height="22"/>
-                                                    <fontDescription key="fontDescription" name="NotoSansKannada-Light" family="Noto Sans Kannada" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="ue7-7I-QqY">
-                                                    <rect key="frame" x="546" y="64" width="53" height="2"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="53" id="0LP-ah-EFA"/>
-                                                    </constraints>
-                                                </progressView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Progress" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nE3-5H-xk5">
-                                                    <rect key="frame" x="546" y="35" width="89" height="21"/>
-                                                    <fontDescription key="fontDescription" name="NotoSansKannada-Regular" family="Noto Sans Kannada" pointSize="13"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9Gi-YU-7qB" customClass="ProgressBarDaysLeft" customModule="StudyTracker">
-                                                    <rect key="frame" x="146.5" y="17" width="370.5" height="28"/>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rmc-IN-hGA" customClass="CircularProgressView" customModule="StudyTracker">
+                                                    <rect key="frame" x="577" y="17" width="76" height="70"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Days Left" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZI7-9O-Gnx">
-                                                            <rect key="frame" x="0.0" y="4" width="369" height="21"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="60%" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0Wl-hb-frA">
+                                                            <rect key="frame" x="21" y="38" width="35" height="22"/>
+                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                            <fontDescription key="fontDescription" name="NotoSansKannada-Light" family="Noto Sans Kannada" pointSize="17"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Progress" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nE3-5H-xk5">
+                                                            <rect key="frame" x="13" y="24" width="53" height="18"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="53" id="KEy-g9-bhP"/>
+                                                            </constraints>
+                                                            <fontDescription key="fontDescription" name="NotoSansKannada-Regular" family="Noto Sans Kannada" pointSize="13"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                     </subviews>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <constraints>
+                                                        <constraint firstItem="nE3-5H-xk5" firstAttribute="top" secondItem="rmc-IN-hGA" secondAttribute="top" constant="24" id="5N8-7T-1gk"/>
+                                                        <constraint firstItem="nE3-5H-xk5" firstAttribute="leading" secondItem="rmc-IN-hGA" secondAttribute="leading" constant="13" id="rRt-46-oOw"/>
+                                                    </constraints>
+                                                </view>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Days Left" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZI7-9O-Gnx">
+                                                    <rect key="frame" x="296" y="23" width="72" height="22"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9Gi-YU-7qB" customClass="ProgressBarDaysLeft" customModule="StudyTracker">
+                                                    <rect key="frame" x="142.5" y="17" width="378.5" height="28"/>
                                                     <color key="backgroundColor" systemColor="systemGroupedBackgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <color key="tintColor" systemColor="systemGroupedBackgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <constraints>
-                                                        <constraint firstItem="ZI7-9O-Gnx" firstAttribute="top" secondItem="9Gi-YU-7qB" secondAttribute="top" constant="4" id="JKO-LK-Thi"/>
-                                                        <constraint firstItem="ZI7-9O-Gnx" firstAttribute="centerX" secondItem="9Gi-YU-7qB" secondAttribute="centerX" id="a0N-wA-mc9"/>
-                                                        <constraint firstItem="ZI7-9O-Gnx" firstAttribute="centerY" secondItem="9Gi-YU-7qB" secondAttribute="centerY" id="n63-UK-LyI"/>
-                                                        <constraint firstItem="ZI7-9O-Gnx" firstAttribute="leading" secondItem="9Gi-YU-7qB" secondAttribute="leading" id="yT0-JJ-aOc"/>
-                                                    </constraints>
                                                 </view>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="nE3-5H-xk5" firstAttribute="leading" secondItem="9Gi-YU-7qB" secondAttribute="trailing" constant="29" id="1U2-CW-Snf"/>
                                                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="f3b-nG-aik" secondAttribute="trailing" constant="20" symbolic="YES" id="99j-su-wIj"/>
-                                                <constraint firstItem="nvj-X1-asD" firstAttribute="top" secondItem="0Wl-hb-frA" secondAttribute="bottom" constant="19" id="C3T-Dm-gRD"/>
                                                 <constraint firstItem="f3b-nG-aik" firstAttribute="top" secondItem="c0U-Je-Mee" secondAttribute="top" constant="53" id="CLp-WW-4fH"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="0Wl-hb-frA" secondAttribute="trailing" constant="6.5" id="DFj-dg-g58"/>
-                                                <constraint firstItem="0Wl-hb-frA" firstAttribute="leading" secondItem="oZx-X4-Mud" secondAttribute="trailing" constant="65" id="FB2-Kx-BXV"/>
+                                                <constraint firstItem="9Gi-YU-7qB" firstAttribute="top" secondItem="rmc-IN-hGA" secondAttribute="top" id="F1X-cb-OuU"/>
                                                 <constraint firstItem="nvj-X1-asD" firstAttribute="leading" secondItem="c0U-Je-Mee" secondAttribute="leading" constant="10" id="Ikr-7o-I2y"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="oZx-X4-Mud" secondAttribute="bottom" constant="42" id="Kso-dU-gYK"/>
-                                                <constraint firstItem="ue7-7I-QqY" firstAttribute="top" secondItem="nE3-5H-xk5" secondAttribute="bottom" constant="8" id="M4V-f6-NSI"/>
-                                                <constraint firstItem="9Gi-YU-7qB" firstAttribute="top" secondItem="c0U-Je-Mee" secondAttribute="topMargin" constant="6" id="MVp-F6-ogT"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="oZx-X4-Mud" secondAttribute="trailing" constant="106.5" id="N5A-dc-sER"/>
                                                 <constraint firstItem="nvj-X1-asD" firstAttribute="top" secondItem="f3b-nG-aik" secondAttribute="bottom" constant="18" id="N9g-6i-t0x"/>
                                                 <constraint firstAttribute="bottom" secondItem="f3b-nG-aik" secondAttribute="bottom" constant="53" id="Ow5-Y7-Z5p"/>
-                                                <constraint firstItem="0Wl-hb-frA" firstAttribute="centerY" secondItem="ue7-7I-QqY" secondAttribute="centerY" id="Qlp-bE-trZ"/>
+                                                <constraint firstItem="ZI7-9O-Gnx" firstAttribute="top" secondItem="c0U-Je-Mee" secondAttribute="topMargin" constant="12" id="PU3-fB-QUz"/>
+                                                <constraint firstItem="nvj-X1-asD" firstAttribute="top" secondItem="rmc-IN-hGA" secondAttribute="bottom" constant="8" id="PXw-Cz-wr9"/>
+                                                <constraint firstItem="oZx-X4-Mud" firstAttribute="top" secondItem="9Gi-YU-7qB" secondAttribute="bottom" constant="8" id="UVA-Gz-CHx"/>
                                                 <constraint firstAttribute="trailing" secondItem="nvj-X1-asD" secondAttribute="trailing" constant="10" id="XhQ-D2-D3O"/>
-                                                <constraint firstItem="0Wl-hb-frA" firstAttribute="centerY" secondItem="oZx-X4-Mud" secondAttribute="centerY" id="YRK-aj-Yml"/>
                                                 <constraint firstAttribute="bottom" secondItem="nvj-X1-asD" secondAttribute="bottom" constant="11" id="ZFL-VD-Fbq"/>
-                                                <constraint firstItem="oZx-X4-Mud" firstAttribute="top" secondItem="9Gi-YU-7qB" secondAttribute="bottom" constant="8" id="d9P-my-lZt"/>
+                                                <constraint firstItem="9Gi-YU-7qB" firstAttribute="centerX" secondItem="oZx-X4-Mud" secondAttribute="centerX" id="b68-jg-f7l"/>
+                                                <constraint firstItem="rmc-IN-hGA" firstAttribute="leading" secondItem="oZx-X4-Mud" secondAttribute="trailing" constant="35" id="bBf-Vl-wVl"/>
                                                 <constraint firstItem="oZx-X4-Mud" firstAttribute="top" secondItem="c0U-Je-Mee" secondAttribute="topMargin" constant="42" id="dQ1-Rh-Q21"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="ue7-7I-QqY" secondAttribute="trailing" constant="49.5" id="isB-Fz-b0s"/>
-                                                <constraint firstItem="9Gi-YU-7qB" firstAttribute="centerX" secondItem="oZx-X4-Mud" secondAttribute="centerX" id="jcL-pF-xj0"/>
+                                                <constraint firstItem="rmc-IN-hGA" firstAttribute="top" secondItem="c0U-Je-Mee" secondAttribute="topMargin" constant="6" id="jCl-Rm-8EL"/>
+                                                <constraint firstItem="rmc-IN-hGA" firstAttribute="leading" secondItem="9Gi-YU-7qB" secondAttribute="trailing" constant="56" id="odi-Em-x7v"/>
                                                 <constraint firstItem="oZx-X4-Mud" firstAttribute="leading" secondItem="c0U-Je-Mee" secondAttribute="leadingMargin" constant="106.5" id="pQV-BJ-fTV"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="nE3-5H-xk5" secondAttribute="trailing" constant="13.5" id="sGd-aU-d1H"/>
+                                                <constraint firstItem="9Gi-YU-7qB" firstAttribute="bottom" secondItem="ZI7-9O-Gnx" secondAttribute="bottom" id="qOZ-8s-smf"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="rmc-IN-hGA" secondAttribute="trailing" constant="-4.5" id="sQ5-fJ-igG"/>
+                                                <constraint firstItem="9Gi-YU-7qB" firstAttribute="centerX" secondItem="ZI7-9O-Gnx" secondAttribute="centerX" id="sTk-Dj-jHj"/>
                                                 <constraint firstItem="f3b-nG-aik" firstAttribute="leading" secondItem="c0U-Je-Mee" secondAttribute="leading" constant="10" id="tRc-Ym-UDu"/>
-                                                <constraint firstItem="nE3-5H-xk5" firstAttribute="leading" secondItem="ue7-7I-QqY" secondAttribute="leading" id="u7V-k7-L1c"/>
-                                                <constraint firstItem="nE3-5H-xk5" firstAttribute="top" secondItem="c0U-Je-Mee" secondAttribute="topMargin" constant="24" id="xgn-1D-ZFC"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
@@ -142,7 +140,7 @@
                                             <outlet property="notes" destination="nvj-X1-asD" id="Jfg-vb-WzP"/>
                                             <outlet property="percentCompleted" destination="0Wl-hb-frA" id="xNX-8o-gyk"/>
                                             <outlet property="progressBarDaysLeft" destination="9Gi-YU-7qB" id="2gw-Hv-CDO"/>
-                                            <outlet property="progressBarPercentLeft" destination="ue7-7I-QqY" id="eXd-Ow-35T"/>
+                                            <outlet property="progressBarPercentLeft" destination="rmc-IN-hGA" id="4ns-GV-3o9"/>
                                             <outlet property="title" destination="oZx-X4-Mud" id="COx-i6-nOM"/>
                                         </connections>
                                     </tableViewCell>
