@@ -89,21 +89,26 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
         let dateNow = Date()
         let dateDue = fetchedTask?.taskDueDate
         let dateWhenSet = fetchedTask?.startDate
-        let timeLeft: [Int] = absDayAndHourBetweenTwoDates(dateNow, dateDue!)
-        let hoursLeft = timeLeft[1]%24
-        let daysLeft = timeLeft[0]
-        let timeLeftStr: String = " \(daysLeft)D, \(hoursLeft)Hrs"
         
+        var timeLeftStr: String
+        if (dateNow > dateDue!){
+            timeLeftStr = "Past Deadline"
+        }
+        else {
+            let seconds: Int = absSecondsBetweenTwoDates(dateNow, dateDue!)
+            timeLeftStr = describeMinutes(minutes: seconds/60)
+        }
         cell.daysLeft.text = timeLeftStr
         
         //3.2 set daysLeft progress bar
-        let currentProgress: Int = absMinutesBetweenTwoDates(dateNow, dateWhenSet!)
-        let maxProgress: Int = absMinutesBetweenTwoDates(dateWhenSet!, dateDue!)
+        let currentProgress: Int = absSecondsBetweenTwoDates(dateNow, dateWhenSet!)
+        let maxProgress: Int = absSecondsBetweenTwoDates(dateWhenSet!, dateDue!)
         
         if(maxProgress != 0){ // to avoid division by 0 at all costs
             // must use float/double arithmetic!!
             let progressRatio: Float = Float(Float(currentProgress)/Float(maxProgress))
-            cell.progressBarDaysLeft.progress = progressRatio
+            cell.progressBarDaysLeft.progress = CGFloat(progressRatio)
+            
 
             print("CELLS CURRENT PROGRESS \(currentProgress)")
             print("MAX PROGRESS \(maxProgress)")

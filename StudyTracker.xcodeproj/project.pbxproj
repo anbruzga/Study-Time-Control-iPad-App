@@ -22,6 +22,7 @@
 		B92C31882476A41E00AC2726 /* AssessmentSummaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B92C31872476A41E00AC2726 /* AssessmentSummaryViewController.swift */; };
 		B930CAC9247F253B00F84B29 /* LinearProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = B930CAC8247F253B00F84B29 /* LinearProgressBar.swift */; };
 		B930CACD248007AE00F84B29 /* EventsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B930CACC248007AE00F84B29 /* EventsController.swift */; };
+		B930CAD32482A50700F84B29 /* ProgressBarDaysLeft.swift in Sources */ = {isa = PBXBuildFile; fileRef = B930CAD22482A50700F84B29 /* ProgressBarDaysLeft.swift */; };
 		B9E5E7532476BF370056DB90 /* AddTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9E5E7522476BF370056DB90 /* AddTaskViewController.swift */; };
 		B9E5E7552476BF560056DB90 /* EditTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9E5E7542476BF560056DB90 /* EditTaskViewController.swift */; };
 		B9E5E7B224782AE50056DB90 /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9E5E7B124782AE50056DB90 /* CustomTableViewCell.swift */; };
@@ -58,6 +59,7 @@
 		B92C31872476A41E00AC2726 /* AssessmentSummaryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssessmentSummaryViewController.swift; sourceTree = "<group>"; };
 		B930CAC8247F253B00F84B29 /* LinearProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinearProgressBar.swift; sourceTree = "<group>"; };
 		B930CACC248007AE00F84B29 /* EventsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsController.swift; sourceTree = "<group>"; };
+		B930CAD22482A50700F84B29 /* ProgressBarDaysLeft.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressBarDaysLeft.swift; sourceTree = "<group>"; };
 		B9E5E7522476BF370056DB90 /* AddTaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTaskViewController.swift; sourceTree = "<group>"; };
 		B9E5E7542476BF560056DB90 /* EditTaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTaskViewController.swift; sourceTree = "<group>"; };
 		B9E5E7B124782AE50056DB90 /* CustomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
@@ -122,6 +124,7 @@
 				B900368224797F0000FDC4B1 /* AvgProgress.swift */,
 				B930CAC8247F253B00F84B29 /* LinearProgressBar.swift */,
 				B930CACC248007AE00F84B29 /* EventsController.swift */,
+				B930CAD22482A50700F84B29 /* ProgressBarDaysLeft.swift */,
 			);
 			path = StudyTracker;
 			sourceTree = "<group>";
@@ -246,6 +249,7 @@
 				B900368324797F0000FDC4B1 /* AvgProgress.swift in Sources */,
 				B92C314D24756FAF00AC2726 /* AppDelegate.swift in Sources */,
 				B930CACD248007AE00F84B29 /* EventsController.swift in Sources */,
+				B930CAD32482A50700F84B29 /* ProgressBarDaysLeft.swift in Sources */,
 				B92C317C2475901100AC2726 /* AddAssessmentViewController.swift in Sources */,
 				B92C317E2475902300AC2726 /* EditAssessmentViewController.swift in Sources */,
 				B9E5E7552476BF560056DB90 /* EditTaskViewController.swift in Sources */,

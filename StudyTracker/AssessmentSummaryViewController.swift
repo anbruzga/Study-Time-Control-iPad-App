@@ -86,15 +86,15 @@ class AssessmentSummaryViewController: UIViewController {
                 return
             }
             
-            let minutesDiff: Int = absMinutesBetweenTwoDates(dateNow, dateDue)
-            let describedTimeLeft: String = describeMinutes(minutes: minutesDiff)
+            let secondsDiff: Int = absSecondsBetweenTwoDates(dateNow, dateDue)
+            let describedTimeLeft: String = describeMinutes(minutes: secondsDiff/60)
             labelDaysLeft.text = describedTimeLeft
             
             
             // setting up PROGRESS VIEW for days left
             let dateWhenSet = currentAssessment?.dateWhenSet
-            let currentProgress: Int = absMinutesBetweenTwoDates(dateNow, dateWhenSet!)
-            let maxProgress: Int = absMinutesBetweenTwoDates(dateWhenSet!, dateDue)
+            let currentProgress: Int = absSecondsBetweenTwoDates(dateNow, dateWhenSet!)
+            let maxProgress: Int = absSecondsBetweenTwoDates(dateWhenSet!, dateDue)
             print("ASSESSMENT: \(String(describing: currentAssessment?.moduleName))")
             
             

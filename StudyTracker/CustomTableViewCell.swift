@@ -15,7 +15,7 @@ class CustomTableViewCell: UITableViewCell {
     @IBOutlet weak var notes: UILabel!
     @IBOutlet weak var percentCompleted: UILabel!
     @IBOutlet weak var progressBarPercentLeft: UIProgressView!
-    @IBOutlet weak var progressBarDaysLeft: UIProgressView!
+    @IBOutlet weak var progressBarDaysLeft: ProgressBarDaysLeft!
     @IBOutlet weak var daysLeft: UILabel!
     
     
@@ -37,14 +37,14 @@ class CustomTableViewCell: UITableViewCell {
         percentCompleted.text = percentCompletedStr
         //progressBarDaysLeft
         //progressBarPercentLeft
-        daysLeft.text = daysLeftStr
+     //   daysLeft.text = daysLeftStr
        
         
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-        print("selected")
+       // print("selected")
 
         // Configure the view for the selected state
     }

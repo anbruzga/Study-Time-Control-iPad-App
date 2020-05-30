@@ -9,6 +9,14 @@
 import Foundation
 
 // Date utility functions
+
+func absSecondsBetweenTwoDates(_ date1: Date, _ date2: Date) -> Int {
+    let cal = Calendar.current
+    let components = cal.dateComponents([.second], from: date1, to: date2)
+    let diff = components.second!
+    return abs(Int(diff))
+}
+
 func absMinutesBetweenTwoDates(_ date1: Date, _ date2: Date) -> Int {
     let cal = Calendar.current
     let components = cal.dateComponents([.minute], from: date1, to: date2)
@@ -61,8 +69,13 @@ func describeMinutes(minutes: Int) -> String {
         return ("\(daysTotal) Day+  Left")
     }
     
+    if (minutes == 0 && hoursTotal == 0) {
+        return "Less Than 1 Minute Left"
+    }
+    
     let minutesModuledAndZeroed: String = addZeroToTimeString(hourOrMin: minutesModuled)
     let hoursZeroed: String = addZeroToTimeString(hourOrMin: hoursTotal)
+    
     
   
     return ("\(hoursZeroed):\(minutesModuledAndZeroed)  Left")
