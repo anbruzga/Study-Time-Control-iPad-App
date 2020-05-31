@@ -89,9 +89,7 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
         cell.progressBarPercentLeft.trackColour = UIColor(red: 255/255, green: 255/255, blue: 102/255, alpha: 0.75)
         cell.progressBarPercentLeft.progressColour = UIColor(red: 255/255, green: 69/255, blue: 147/255, alpha: 0.75)
         
-        cell.progressBarPercentLeft.tag = 101
         cell.progressBarPercentLeft.setProgressWithAnimation(duration: 1.0, value: fetchedTask?.progress ?? 0.0)
-        
         
         let percentCompleted = round((fetchedTask?.progress ?? 0.0) * 100);
         cell.percentCompleted.text = String(percentCompleted.clean) + " %"

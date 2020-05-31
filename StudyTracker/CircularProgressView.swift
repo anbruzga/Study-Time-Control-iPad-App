@@ -8,6 +8,10 @@
 
 import UIKit
 
+//££££££££££££££££££££££££££££££££££
+// View is adapted from https://github.com/leoiphonedev/CircularProgressView-Tutorial/blob/master/CircularProgressView-Tutorial/CircularProgressView.swift
+
+
 class CircularProgressView: UIView {
     
     var progress: Float = 0
@@ -64,6 +68,8 @@ class CircularProgressView: UIView {
         animation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.linear)
         progressLayer.strokeEnd = CGFloat(value)
         progressLayer.add(animation, forKey: "animateprogress")
+      
     }
     
 }
+//££££££££££££££££££££££££££££££££££

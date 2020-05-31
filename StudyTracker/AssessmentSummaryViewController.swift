@@ -15,9 +15,9 @@ class AssessmentSummaryViewController: UIViewController {
     @IBOutlet weak var assessmentType: UILabel!
     @IBOutlet weak var assessmentNotes: UITextView!
     @IBOutlet weak var labelPercentCompleted: UILabel!
-    @IBOutlet weak var progressViewForPercentCompleted: UIProgressView!
     @IBOutlet weak var labelDaysLeft: UILabel!
-    @IBOutlet weak var progressViewForDaysLeft: UIProgressView!
+    @IBOutlet weak var progressViewForPercentCompleted: CircularProgressView!
+    @IBOutlet weak var progressViewForDaysLeft: CircularProgressView!
     
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
@@ -30,15 +30,23 @@ class AssessmentSummaryViewController: UIViewController {
         
         NotificationCenter.default.addObserver(self, selector: #selector(reloadPercentCompleted), name: NSNotification.Name(rawValue: "reloadPercentCompletedProgressBar"), object: nil)
         
+        progressViewForPercentCompleted.trackColour = UIColor(red: 255/255, green: 255/255, blue: 102/255, alpha: 0.75)
+        progressViewForPercentCompleted.progressColour = UIColor(red: 255/255, green: 69/255, blue: 147/255, alpha: 0.75)
+        progressViewForDaysLeft.trackColour = UIColor(red: 255/255, green: 255/255, blue: 102/255, alpha: 0.75)
+        progressViewForDaysLeft.progressColour = UIColor(red: 255/255, green: 69/255, blue: 147/255, alpha: 0.75)
+        
         
         initAllFields()
+        
+        
         
         
     }
     @objc func reloadPercentCompleted(notification: NSNotification){
         progressViewForPercentCompleted.progress = AvgProgress.getAvg()
+        progressViewForPercentCompleted.setProgressWithAnimation(duration: 1.0, value: AvgProgress.getAvg())
         let cleanedPercent = round(AvgProgress.getAvg() * 100.0).clean
-        labelPercentCompleted.text = String(cleanedPercent) + " %"
+        labelPercentCompleted.text = String(cleanedPercent) + "%"
         print (labelPercentCompleted.text)
     }
     
@@ -83,6 +91,7 @@ class AssessmentSummaryViewController: UIViewController {
             if(dateNow > dateDue){
                 labelDaysLeft.text = "Past Deadline"
                 progressViewForDaysLeft.progress = 1.0
+                progressViewForDaysLeft.setProgressWithAnimation(duration: 1.0, value: 1)
                 return
             }
             
@@ -101,6 +110,7 @@ class AssessmentSummaryViewController: UIViewController {
             if (maxProgress != 0) { // to avoid division by 0
                 let progressRatio: Float = Float(Float(currentProgress)/Float(maxProgress))
                 self.progressViewForDaysLeft.progress = progressRatio
+                progressViewForDaysLeft.setProgressWithAnimation(duration: 1.0, value: progressRatio)
                 print("Current progress \(currentProgress)")
                 print("Max progress \(maxProgress)")
                 print("Progress ratio \(progressRatio)")
@@ -115,6 +125,7 @@ class AssessmentSummaryViewController: UIViewController {
                 print("DATE WHEN SET: \(String(describing: dateWhenSet?.description))")
                 print("DATE DUE: \(String(describing: dateDue.description))")
                 self.progressViewForDaysLeft.progress = 1
+                progressViewForDaysLeft.setProgressWithAnimation(duration: 1.0, value: 1)
             }
             
         }
