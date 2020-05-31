@@ -11,6 +11,9 @@ import CoreData
 
 class MasterViewController: UITableViewController, NSFetchedResultsControllerDelegate {
     
+    let cellColour:UIColor = UIColor(red: 1.0, green: 147.0/255.0, blue: 0.0, alpha: 0.1)
+    let cellSelColour:UIColor = UIColor(red: 1.0, green: 157.0/255.0, blue: 0.0, alpha: 0.5)
+    
     var detailViewController: DetailViewController? = nil
     var managedObjectContext: NSManagedObjectContext? = nil
     var currentAssessment: Assessment?
@@ -19,6 +22,7 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        
         
         if let split = splitViewController {
             let controllers = split.viewControllers
@@ -91,7 +95,11 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
         let assessment = fetchedResultsController.object(at: indexPath)
         configureCell(cell, withAssessment: assessment)
-        
+
+        let backgroundView = UIView()
+        backgroundView.backgroundColor = cellSelColour
+        cell.selectedBackgroundView = backgroundView
+      
 
         return cell
     }
@@ -136,6 +144,7 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
     
     func configureCell(_ cell: UITableViewCell, withAssessment assessment: Assessment) {
         cell.textLabel!.text = assessment.moduleName
+        cell.backgroundColor = cellColour
     }
     
     // MARK: - Fetched results controller
@@ -151,8 +160,7 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         fetchRequest.fetchBatchSize = 20
         
         // Edit the sort key as appropriate.
-        //TODO sort by what?
-        let sortDescriptor = NSSortDescriptor(key: "moduleName", ascending: false)
+        let sortDescriptor = NSSortDescriptor(key: "dateWhenSet", ascending: false)
         
         fetchRequest.sortDescriptors = [sortDescriptor]
         

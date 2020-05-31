@@ -40,29 +40,42 @@ class EditAssessmentViewController: UIViewController {
         
         
     }
-    //todo add guards
+   
     @IBAction func updateAssessment(_ sender: UIButton) {
-        currentAssessment?.moduleName = module.text
-        currentAssessment?.type = type.text
-        currentAssessment?.value = value.text
-        currentAssessment?.notes = notes.text
-        currentAssessment?.markAwarded = mark.text
-        currentAssessment?.isReminderSet = saveToCal.isOn
-        currentAssessment?.reminderDate = datePicker.date
-        currentAssessment?.dateWhenSet = Date()
         
-        //set reminder in default reminders application
-        let title = self.module.text! + ": " + self.type.text!
-        if saveToCal.isOn {
-            saveReminder(title: title, notes: self.notes.text ?? "", dateDue: self.datePicker.date, setAlarm: true)
+        if self.module.text!.count > 0 && self.type.text!.count > 0 {
+            //Validation
+            if(!validation()){
+                return
+            }
+            
+            currentAssessment?.moduleName = module.text
+            currentAssessment?.type = type.text
+            currentAssessment?.value = value.text
+            currentAssessment?.notes = notes.text
+            currentAssessment?.markAwarded = mark.text
+            currentAssessment?.isReminderSet = saveToCal.isOn
+            currentAssessment?.reminderDate = datePicker.date
+            currentAssessment?.dateWhenSet = Date()
+            
+            //set reminder in default reminders application
+            let title = self.module.text! + ": " + self.type.text!
+            if saveToCal.isOn {
+                saveReminder(title: title, notes: self.notes.text ?? "", dateDue: self.datePicker.date, setAlarm: true)
+            }
+            
+            // set event in default events application
+            saveEvent(title: title, subtitle: "", notes: self.notes.text ?? "", startDate: self.datePicker.date, setAlarm: true)
+            
+            (UIApplication.shared.delegate as! AppDelegate).saveContext()
+            //close popover
+            self.presentingViewController!.dismiss(animated: false, completion: nil)
+            
+        } else{
+            showAlert("Missing Data", "Module and Assessment fields must be not empty" )
+            return
+            
         }
-        
-        // set event in default events application
-        saveEventToCalendar(title: title, subtitle: "", notes: self.notes.text ?? "", startDate: self.datePicker.date, setAlarm: true)
-        
-        (UIApplication.shared.delegate as! AppDelegate).saveContext()
-        //close popover
-        self.presentingViewController!.dismiss(animated: false, completion: nil)
     }
     
     func showAlert (_ title: String, _ message: String){
@@ -72,59 +85,47 @@ class EditAssessmentViewController: UIViewController {
         self.present(alert, animated: true, completion: nil)
     }
     
- /*   // MARK: - SAVE TO CALENDAR
-    func saveToCalendar(){
-        
-        
-        // checks for bad time
-        let eventStartDate = datePicker.date
-        if isDatePastNow(eventStartDate) {
-            showAlert("Date error!", "Selected date is in the past")
-            return
+    // MARK: - VALIDATION
+    func validation() -> Bool{
+        //Checking if value and mark are numeric
+        if let val = self.value.text {
+            if(val == ""){
+                return true
+            }
+            if (datePicker.date > Date().advanced(by: 60 as TimeInterval)){ // one minute to fix issues when adding on the spot
+                showAlert("Syntax Error", "Mark can only be set for the past assessments")
+                return false
+            }
+            
+            if (!isNum(val)){
+                showAlert("Error", "Mark should be in range 0 to 100")
+                return false
+            }
+            if (Double(val) ?? -1 > 100 || Double(val) ?? -1 < 0) {
+                showAlert("Syntax Error", "Value should be in range 0 to 100")
+                return false
+            }
         }
         
-        
-        let eventStore = EKEventStore()
-        
-        eventStore.requestAccess(to: EKEntityType.reminder, completion:
-            {(granted, error) in
-                if (granted) && (error == nil) {
-                    print("granted \(granted)")
-                    print("error \(String(describing: error))")
-                    
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                        let reminder: EKReminder = EKReminder(eventStore: eventStore)
-                        let reminderTitle: String = self.module.text! + " : " + self.type.text!
-                        reminder.title = reminderTitle
-                        reminder.notes = self.notes.text
-                        
-                        let  dueDateComp = dateComponentFromDate(self.currentAssessment!.reminderDate!)
-                        print("DATE: ")
-                        print("\(self.currentAssessment!.reminderDate!.description)")
-                        reminder.dueDateComponents = dueDateComp
-                        reminder.calendar = eventStore.defaultCalendarForNewReminders()
-                        do {
-                            try eventStore.save(reminder, commit: true)
-                            
-                        }catch{
-                            print("Error creating and saving new reminder : \(error)")
-                        }
-                    }
-                }
+        if let mark = self.mark.text {
+            if(mark == ""){
+                return true
+            }
+            if (!isNum(mark)){
+                showAlert("Syntax Error", "Mark should be in range 0 to 100")
+                return false
+            }
+            if (Double(mark) ?? -1 > 100 || Double(mark) ?? -1 < 0) {
+                showAlert("Syntax Error", "Mark should be in range 0 to 100")
+                return false
+            }
         }
-        )
-    }*/
+        return true
+    }
     
+    func isNum(_ val: String) -> Bool {
+        return (val.lowercased() == val.uppercased() && val.isNumber)
+    }
     
-    
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destination.
-     // Pass the selected object to the new view controller.
-     }
-     */
     
 }

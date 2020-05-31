@@ -20,7 +20,6 @@
 		B92C317C2475901100AC2726 /* AddAssessmentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B92C317B2475901100AC2726 /* AddAssessmentViewController.swift */; };
 		B92C317E2475902300AC2726 /* EditAssessmentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B92C317D2475902300AC2726 /* EditAssessmentViewController.swift */; };
 		B92C31882476A41E00AC2726 /* AssessmentSummaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B92C31872476A41E00AC2726 /* AssessmentSummaryViewController.swift */; };
-		B930CAC9247F253B00F84B29 /* LinearProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = B930CAC8247F253B00F84B29 /* LinearProgressBar.swift */; };
 		B930CACD248007AE00F84B29 /* EventsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B930CACC248007AE00F84B29 /* EventsController.swift */; };
 		B930CAD32482A50700F84B29 /* ProgressBarDaysLeft.swift in Sources */ = {isa = PBXBuildFile; fileRef = B930CAD22482A50700F84B29 /* ProgressBarDaysLeft.swift */; };
 		B930CAD52482C82100F84B29 /* CircularProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B930CAD42482C82100F84B29 /* CircularProgressView.swift */; };
@@ -58,7 +57,6 @@
 		B92C317B2475901100AC2726 /* AddAssessmentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAssessmentViewController.swift; sourceTree = "<group>"; };
 		B92C317D2475902300AC2726 /* EditAssessmentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditAssessmentViewController.swift; sourceTree = "<group>"; };
 		B92C31872476A41E00AC2726 /* AssessmentSummaryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssessmentSummaryViewController.swift; sourceTree = "<group>"; };
-		B930CAC8247F253B00F84B29 /* LinearProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinearProgressBar.swift; sourceTree = "<group>"; };
 		B930CACC248007AE00F84B29 /* EventsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsController.swift; sourceTree = "<group>"; };
 		B930CAD22482A50700F84B29 /* ProgressBarDaysLeft.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressBarDaysLeft.swift; sourceTree = "<group>"; };
 		B930CAD42482C82100F84B29 /* CircularProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularProgressView.swift; sourceTree = "<group>"; };
@@ -124,7 +122,6 @@
 				B9E5E7B124782AE50056DB90 /* CustomTableViewCell.swift */,
 				B9E5E7B3247838E80056DB90 /* DateUtils.swift */,
 				B900368224797F0000FDC4B1 /* AvgProgress.swift */,
-				B930CAC8247F253B00F84B29 /* LinearProgressBar.swift */,
 				B930CACC248007AE00F84B29 /* EventsController.swift */,
 				B930CAD22482A50700F84B29 /* ProgressBarDaysLeft.swift */,
 				B930CAD42482C82100F84B29 /* CircularProgressView.swift */,
@@ -245,7 +242,6 @@
 				B92C315424756FAF00AC2726 /* MasterViewController.swift in Sources */,
 				B9E5E7B4247838E80056DB90 /* DateUtils.swift in Sources */,
 				B92C315024756FAF00AC2726 /* StudyTracker.xcdatamodeld in Sources */,
-				B930CAC9247F253B00F84B29 /* LinearProgressBar.swift in Sources */,
 				B9E5E7B224782AE50056DB90 /* CustomTableViewCell.swift in Sources */,
 				B92C315624756FAF00AC2726 /* DetailViewController.swift in Sources */,
 				B92C31882476A41E00AC2726 /* AssessmentSummaryViewController.swift in Sources */,

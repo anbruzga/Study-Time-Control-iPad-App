@@ -56,7 +56,8 @@ func dateComponentFromDate(_ date: Date)-> DateComponents{
     return comps
 }
 
-func describeMinutes(minutes: Int) -> String {
+func describeSeconds(seconds: Int) -> String {
+    let minutes = seconds/60
     let hoursTotal: Int = minutes / 60
     let minutesModuled: Int = minutes % 60
     let daysTotal: Int = hoursTotal / 24
@@ -69,7 +70,7 @@ func describeMinutes(minutes: Int) -> String {
         return ("\(daysTotal) Day+  Left")
     }
     
-    if (minutes == 0 && hoursTotal == 0) {
+    if (minutes == 0 && hoursTotal == 0 && seconds % 60 != 0) {
         return "Less Than 1 Minute Left"
     }
     

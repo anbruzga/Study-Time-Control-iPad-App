@@ -25,6 +25,9 @@ class AddTaskViewController: UIViewController {
         super.viewDidLoad()
         labelNotes.text = ""
         
+       // datePicker.minimumDate = currentAssessment?.dateWhenSet
+       // datePicker.maximumDate = currentAssessment?.reminderDate
+        
         // Do any additional setup after loading the view.
     }
     

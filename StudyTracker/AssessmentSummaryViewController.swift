@@ -92,11 +92,14 @@ class AssessmentSummaryViewController: UIViewController {
                 labelDaysLeft.text = "Past Deadline"
                 progressViewForDaysLeft.progress = 1.0
                 progressViewForDaysLeft.setProgressWithAnimation(duration: 1.0, value: 1)
-                return
+                return // Important!
             }
             
             let secondsDiff: Int = absSecondsBetweenTwoDates(dateNow, dateDue)
-            let describedTimeLeft: String = describeMinutes(minutes: secondsDiff/60)
+            var describedTimeLeft: String = describeSeconds(seconds: secondsDiff)
+            if (describedTimeLeft == "Less Than 1 Minute Left"){
+                describedTimeLeft = " < 1 Min"
+            }
             labelDaysLeft.text = describedTimeLeft
             
             
@@ -111,13 +114,9 @@ class AssessmentSummaryViewController: UIViewController {
                 let progressRatio: Float = Float(Float(currentProgress)/Float(maxProgress))
                 self.progressViewForDaysLeft.progress = progressRatio
                 progressViewForDaysLeft.setProgressWithAnimation(duration: 1.0, value: progressRatio)
-                print("Current progress \(currentProgress)")
-                print("Max progress \(maxProgress)")
-                print("Progress ratio \(progressRatio)")
-                
-                if(progressRatio > 1 && labelDaysLeft.text! != "Past deadline"){
-                    print("UNEXPECTED RATIO")
-                }
+            //    print("Current progress \(currentProgress)")
+            //    print("Max progress \(maxProgress)")
+            //    print("Progress ratio \(progressRatio)")
                 
             }
             else {  // can happen if  dateWhenSet and dateDue is same or has less than one minute difference
@@ -127,6 +126,7 @@ class AssessmentSummaryViewController: UIViewController {
                 self.progressViewForDaysLeft.progress = 1
                 progressViewForDaysLeft.setProgressWithAnimation(duration: 1.0, value: 1)
             }
+            
             
         }
     }

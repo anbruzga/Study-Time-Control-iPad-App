@@ -56,10 +56,10 @@ class AddAssessmentViewController: UIViewController {
             newAssessment.moduleName = self.module.text // mandatory
             newAssessment.notes = self.notes.text // optional
             newAssessment.type = self.type.text // mandatory
-            newAssessment.value = self.value.text // number, optional // TODO
-            newAssessment.markAwarded = self.markAchieved.text // optional, number. Allowed only for editing, takes into account date ?? Todo
+            newAssessment.value = self.value.text // number, optional
+            newAssessment.markAwarded = self.markAchieved.text // optional, number. Allowed only for editing, takes into account date
             
-            newAssessment.reminderDate = datePicker.date // extract date for saving if saveToCal is true
+            newAssessment.reminderDate = datePicker.date // extract date for saving 
             newAssessment.isReminderSet = saveToCal.isOn // save if on
             newAssessment.dateWhenSet = Date()
             
@@ -71,7 +71,7 @@ class AddAssessmentViewController: UIViewController {
             }
             
             // set event in default events application
-            saveEventToCalendar(title: title, subtitle: "", notes: self.notes.text ?? "", startDate: self.datePicker.date, setAlarm: true)
+            saveEvent(title: title, subtitle: "", notes: self.notes.text ?? "", startDate: self.datePicker.date, setAlarm: true)
             
             currentAssessment = newAssessment
             
@@ -92,20 +92,33 @@ class AddAssessmentViewController: UIViewController {
         //Checking if value and mark are numeric
         if let val = self.value.text {
             if(val == ""){
-                //pass
+                return true
             }
-            else if (!isNum(val)){
-                showAlert("Syntax Error", "Wrong input type: " + val + " is not a number")
+            if (datePicker.date > Date().advanced(by: 60 as TimeInterval)){ // one minute to fix issues when adding on the spot
+                showAlert("Syntax Error", "Mark can only be set for the past assessments")
+                return false
+            }
+                
+            if (!isNum(val)){
+                showAlert("Error", "Mark should be in range 0 to 100")
+                return false
+            }
+            if (Double(val) ?? -1 > 100 || Double(val) ?? -1 < 0) {
+                showAlert("Syntax Error", "Value should be in range 0 to 100")
                 return false
             }
         }
         
         if let mark = self.markAchieved.text {
             if(mark == ""){
-                //pass
+                return true
             }
-            else if (!isNum(mark)){
-                showAlert("Syntax Error", "Wrong input type: " + mark + " is not a number")
+            if (!isNum(mark)){
+                showAlert("Syntax Error", "Mark should be in range 0 to 100")
+                return false
+            }
+            if (Double(mark) ?? -1 > 100 || Double(mark) ?? -1 < 0) {
+                showAlert("Syntax Error", "Mark should be in range 0 to 100")
                 return false
             }
         }
@@ -115,52 +128,7 @@ class AddAssessmentViewController: UIViewController {
     func isNum(_ val: String) -> Bool {
         return (val.lowercased() == val.uppercased() && val.isNumber)
     }
-    /*
-    // MARK: - SAVE TO CALENDAR
-    func saveReminder(){
-        
-        
-        // checks for bad time
-        let eventStartDate = datePicker.date
-        if isDatePastNow(eventStartDate) {
-            showAlert("Date error!", "Selected date is in the past")
-            return
-        }
-        
-        
-        let eventStore = EKEventStore()
-        
-        eventStore.requestAccess(to: EKEntityType.reminder, completion:
-            {(granted, error) in
-                if (granted) && (error == nil) {
-                    print("granted \(granted)")
-                    print("error \(String(describing: error))")
-                    
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                        let reminder: EKReminder = EKReminder(eventStore: eventStore)
-                        let reminderTitle: String = self.module.text! + " : " + self.type.text!
-                        reminder.title = reminderTitle
-                        reminder.notes = self.notes.text
-                        
-                        let  dueDateComp = dateComponentFromDate(self.currentAssessment!.reminderDate!)
-                        print("DATE: ")
-                        print("\(self.currentAssessment!.reminderDate!.description)")
-                        reminder.dueDateComponents = dueDateComp
-                        reminder.calendar = eventStore.defaultCalendarForNewReminders()
-                        //reminder.calendar = eventStore.defaultCalendarForNewEvents
-                        do {
-                            try eventStore.save(reminder, commit: true)
-                            
-                        }catch{
-                            print("Error creating and saving new reminder : \(error)")
-                        }
-                    }
-                }
-        }
-        )
-    }
-    
-    */
+   
     
     
     // MARK: - UTILITIES

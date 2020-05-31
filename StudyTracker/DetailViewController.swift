@@ -27,8 +27,10 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
     @IBOutlet weak var addTaskButton: UIBarButtonItem!
     
     
-    let cellColour:UIColor = UIColor(red: 0.0, green: 1.0, blue: 0.0, alpha: 0.1)
-    let cellSelColour:UIColor = UIColor(red: 0.0, green: 1.0, blue: 0.0, alpha: 0.2)
+  //  let cellColour:UIColor = UIColor(red: 0.0, green: 1.0, blue: 0.0, alpha: 0.1)
+  //  let cellSelColour:UIColor = UIColor(red: 0.0, green: 1.0, blue: 0.0, alpha: 0.2)
+    let cellColour:UIColor = UIColor(red: 1.0, green: 147.0/255.0, blue: 0.0, alpha: 0.1)
+    let cellSelColour:UIColor = UIColor(red: 1.0, green: 157.0/255.0, blue: 0.0, alpha: 0.2)
     let managedObjectContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     override func viewDidLoad() {
@@ -92,7 +94,7 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
         cell.progressBarPercentLeft.setProgressWithAnimation(duration: 1.0, value: fetchedTask?.progress ?? 0.0)
         
         let percentCompleted = round((fetchedTask?.progress ?? 0.0) * 100);
-        cell.percentCompleted.text = String(percentCompleted.clean) + " %"
+        cell.percentCompleted.text = String(percentCompleted.clean) + "%"
         
         //3. count daysLeft and progressBar
         //3.1 set daysLeft label
@@ -103,31 +105,35 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
         var timeLeftStr: String
         if (dateNow > dateDue!){
             timeLeftStr = "Past Deadline"
+            cell.progressBarDaysLeft.progress = 1.0
+            cell.daysLeft.text = timeLeftStr
         }
         else {
             let seconds: Int = absSecondsBetweenTwoDates(dateNow, dateDue!)
-            timeLeftStr = describeMinutes(minutes: seconds/60)
-        }
-        cell.daysLeft.text = timeLeftStr
-        
-        //3.2 set daysLeft progress bar
-        let currentProgress: Int = absSecondsBetweenTwoDates(dateNow, dateWhenSet!)
-        let maxProgress: Int = absSecondsBetweenTwoDates(dateWhenSet!, dateDue!)
-        
-        if(maxProgress != 0){ // to avoid division by 0 at all costs
-            // must use float/double arithmetic!!
-            let progressRatio: Float = Float(Float(currentProgress)/Float(maxProgress))
-            cell.progressBarDaysLeft.progress = CGFloat(progressRatio)
+            timeLeftStr = describeSeconds(seconds: seconds)
+            print(timeLeftStr)
+            cell.daysLeft.text = timeLeftStr
             
-
-            print("CELLS CURRENT PROGRESS \(currentProgress)")
-            print("MAX PROGRESS \(maxProgress)")
-            print("PROGRESS RATIO \(progressRatio)")
-        }
-        else{ // can happen if user sets the task at default DateTime
-            print("CELLS MAX PROGRESS IS 0")
-            print("DATE WHEN SET: \(String(describing: dateWhenSet?.description))")
-            print("DATE DUE: \(String(describing: dateDue?.description))")
+            //3.2 set daysLeft progress bar
+            let currentProgress: Int = absSecondsBetweenTwoDates(dateNow, dateWhenSet!)
+            let maxProgress: Int = absSecondsBetweenTwoDates(dateWhenSet!, dateDue!)
+            
+            if(maxProgress != 0){ // to avoid division by 0 at all costs
+                // must use float/double arithmetic!
+                let progressRatio: Float = Float(Float(currentProgress)/Float(maxProgress))
+                cell.progressBarDaysLeft.progress = CGFloat(progressRatio)
+                
+               // print("CELLS CURRENT PROGRESS \(currentProgress)")
+               // print("MAX PROGRESS \(maxProgress)")
+               // print("PROGRESS RATIO \(progressRatio)")
+                
+            }
+            else{ // can happen if user sets the task at default DateTime
+               // print("CELLS MAX PROGRESS IS 0")
+               // print("DATE WHEN SET: \(String(describing: dateWhenSet?.description))")
+               // print("DATE DUE: \(String(describing: dateDue?.description))")
+                cell.progressBarDaysLeft.progress = 1
+            }
         }
         
         
@@ -161,7 +167,7 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
     func configureView() {
         // Update the user interface for the detail item.
         if let assessment = assessment {
-            if let label = detailDescriptionLabel { // todo is this needed??
+            if let label = detailDescriptionLabel { 
                 label.text = assessment.moduleName
             }
             
@@ -246,7 +252,8 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
         
         // Edit the sort key as appropriate.
         // true for alphabetical sorting
-        let sortDescriptor = NSSortDescriptor(key: "title", ascending: true, selector: #selector(NSString.localizedStandardCompare(_:)))
+        // let sortDescriptor = NSSortDescriptor(key: "title", ascending: true, selector: #selector(NSString.localizedStandardCompare(_:)))
+        let sortDescriptor = NSSortDescriptor(key: "startDate", ascending: true)
         
         fetchRequest.sortDescriptors = [sortDescriptor]
         

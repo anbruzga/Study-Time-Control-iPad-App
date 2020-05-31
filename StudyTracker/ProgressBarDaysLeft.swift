@@ -10,22 +10,22 @@ import UIKit
 
 class ProgressBarDaysLeft: UIView {
     
-    // Reference 1 in the footnotes _______________
+
     @IBInspectable var startColor: UIColor = UIColor(red: 255/255, green: 255/255, blue: 102/255, alpha: 0.75)
     @IBInspectable var endColor: UIColor = UIColor(red: 255/255, green: 69/255, blue: 147/255, alpha: 0.75)
-    // ____________________________________________
+
     
     // progress should be between 0 and 1
     var progress:CGFloat = 0
     
-    
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
     override func draw(_ rect: CGRect) {
         
+        // ______________________________________________
+        // Displaying the gradient. References:
+        // https://stackoverflow.com/questions/48235463/how-to-gradient-fill-custom-uiview-using-swift
+        // from user Veture at https://stackoverflow.com/users/4441676/vetuka
+        //_______________________________________________
         
-        
-        // Reference 1 in the footnotes _______________
         let context = UIGraphicsGetCurrentContext()!
         let colors = [startColor.cgColor, endColor.cgColor]
         

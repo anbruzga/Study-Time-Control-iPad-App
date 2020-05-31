@@ -24,10 +24,12 @@ class EditTaskViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // datePicker.minimumDate = currentAssessment?.dateWhenSet
+        // datePicker.maximumDate = currentAssessment?.reminderDate
         
         labelTaskName.text = currentTask?.title
         labelNotes.text = currentTask?.notes
-        //todo rethink switch on and of. Will kind of encourage duplicates in calendar
+       
         switchAddNotif.setOn(currentTask?.isReminderSet ?? false, animated: false)
         sliderProgress.setValue(currentTask?.progress ?? 0.0 , animated: false)
         datePicker.date = currentTask?.taskDueDate ?? Date()

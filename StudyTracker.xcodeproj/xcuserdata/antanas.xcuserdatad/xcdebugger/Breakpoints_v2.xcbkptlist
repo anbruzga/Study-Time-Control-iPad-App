@@ -33,58 +33,10 @@
             filePath = "StudyTracker/EditTaskViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "35"
-            endingLineNumber = "35"
+            startingLineNumber = "37"
+            endingLineNumber = "37"
             landmarkName = "viewDidLoad()"
             landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "BE4F2005-EE14-4DF1-9A69-549A31306D47"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "StudyTracker/AddAssessmentViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "142"
-            endingLineNumber = "142"
-            landmarkName = "AddAssessmentViewController"
-            landmarkType = "3">
-            <Locations>
-               <Location
-                  uuid = "BE4F2005-EE14-4DF1-9A69-549A31306D47 - 775d5f8e7157fe7"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Bool, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in StudyTracker.AddAssessmentViewController.saveToCalendar() -&gt; ()"
-                  moduleName = "StudyTracker"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/antanas/Desktop/StudyTracker/StudyTracker/AddAssessmentViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "134"
-                  endingLineNumber = "134"
-                  offsetFromSymbolStart = "1427">
-               </Location>
-               <Location
-                  uuid = "BE4F2005-EE14-4DF1-9A69-549A31306D47 - d540c1b30dff3a61"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 () -&gt; () in closure #1 (Swift.Bool, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in StudyTracker.AddAssessmentViewController.saveToCalendar() -&gt; ()"
-                  moduleName = "StudyTracker"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/antanas/Desktop/StudyTracker/StudyTracker/AddAssessmentViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "135"
-                  endingLineNumber = "135"
-                  offsetFromSymbolStart = "185">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

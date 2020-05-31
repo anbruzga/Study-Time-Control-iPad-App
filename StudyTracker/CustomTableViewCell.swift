@@ -28,25 +28,17 @@ class CustomTableViewCell: UITableViewCell {
     public var daysLeftStr: String = ""
   
 
-    override func awakeFromNib() { // todo what does it doooo?
+    override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
         cellNo.text = cellNoStr
         title.text = titleStr
         notes.text = notesStr
         percentCompleted.text = percentCompletedStr
-        //progressBarDaysLeft
-        //progressBarPercentLeft
-     //   daysLeft.text = daysLeftStr
-       
-        
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
        // print("selected")
-
-        // Configure the view for the selected state
     }
     
     public func updateValues(cellNo: String, title: String){

@@ -11,7 +11,7 @@ import EventKitUI
 import EventKit
 
 
-func saveEventToCalendar(title: String, subtitle: String, notes: String, startDate: Date, setAlarm: Bool){
+func saveEvent(title: String, subtitle: String, notes: String, startDate: Date, setAlarm: Bool){
     
     // create event in calendar
     // @@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -94,7 +94,8 @@ func saveReminder(title: String, notes: String, dateDue: Date, setAlarm: Bool){
                     let  dueDateComp = dateComponentFromDate(dateDue)
                     reminder.dueDateComponents = dueDateComp
                     reminder.calendar = eventStore.defaultCalendarForNewReminders()
-               
+                    //reminder.calendar = eventStore.defaultCalendarForNewEvents
+                    
                     // Optionally add alarm
                     if setAlarm {
                         let alarm: EKAlarm = EKAlarm.init(absoluteDate: dateDue)
