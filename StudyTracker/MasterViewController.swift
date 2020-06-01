@@ -11,33 +11,58 @@ import CoreData
 
 class MasterViewController: UITableViewController, NSFetchedResultsControllerDelegate {
     
+
+    
     let cellColour:UIColor = UIColor(red: 1.0, green: 147.0/255.0, blue: 0.0, alpha: 0.1)
     let cellSelColour:UIColor = UIColor(red: 1.0, green: 157.0/255.0, blue: 0.0, alpha: 0.5)
     
     var detailViewController: DetailViewController? = nil
     var managedObjectContext: NSManagedObjectContext? = nil
     var currentAssessment: Assessment?
+
     @IBOutlet weak var editAssessmentButton: UIBarButtonItem!
+    
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        tableView.delegate = self
+       // tableView.dataSource = self
+        print("CREATED")
         
+        // Restoring UI State:
+        if (UserDefaults.standard.integer(forKey: "doRetrieveMasterCell") == 1) {
+            let indexPathRestored = NSIndexPath(row: UserDefaults.standard.integer(forKey: "lastSelectedMasterCell"), section: 0)
+            // selecting first cell programatically
+            // let index = NSIndexPath(row: 0, section: 0)
+            self.tableView.selectRow(at: indexPathRestored as IndexPath, animated: true, scrollPosition: UITableView.ScrollPosition.middle)
+            tableView.delegate?.tableView!(tableView!, didSelectRowAt: indexPathRestored as IndexPath)
+            let cell = tableView.cellForRow(at: indexPathRestored as IndexPath)
+            performSegue(withIdentifier: "showDetail", sender: cell)
+            
+            if (UserDefaults.standard.integer(forKey: "editAssessmentPopoverActive") == 1) {
+                performSegue(withIdentifier: "editAssessment", sender: cell)
+                
+            }
+            
+            else if (UserDefaults.standard.integer(forKey: "addAssessmentPopoverActive") == 1) {
+                performSegue(withIdentifier: "addAssessment", sender: cell)
+            }
+        }
         
+   
         if let split = splitViewController {
             let controllers = split.viewControllers
             detailViewController = (controllers[controllers.count-1] as! UINavigationController).topViewController as? DetailViewController
         }
-        
-        // selecting first cell programatically
-        // let index = NSIndexPath(row: 0, section: 0)
-        //  self.tableView.selectRow(at: index as IndexPath, animated: true, scrollPosition: UITableView.ScrollPosition.middle)
+ 
     }
     
     override func viewWillAppear(_ animated: Bool) {
         clearsSelectionOnViewWillAppear = splitViewController!.isCollapsed
         super.viewWillAppear(animated)
     }
+    
     
     @objc
     func insertNewObject(_ sender: Any) {
@@ -71,6 +96,10 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
               controller.navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem
               controller.navigationItem.leftItemsSupplementBackButton = true
               detailViewController = controller
+           // if let Task = controller.selectedTask {
+          //      controller.s
+          //  }
+            
              
           }
         }
@@ -100,6 +129,7 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         backgroundView.backgroundColor = cellSelColour
         cell.selectedBackgroundView = backgroundView
       
+        cell.restorationIdentifier = "Assessment " + String(indexPath.row+1) //todo to save
 
         return cell
     }
@@ -130,21 +160,25 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         print("Selected cell number: \(indexPath.row)!")
         editAssessmentButton.isEnabled = true
         //DISABLE EDITTASK BUTTON NOTIF
-         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "disableEditTaskDueLostFocus"), object: nil)
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "disableEditTaskDueLostFocus"), object: nil)
+        UserDefaults.standard.set(indexPath.row, forKey: "lastSelectedMasterCell")
+        UserDefaults.standard.set(1, forKey: "doRetrieveMasterCell")
         
     }
     
     override func tableView(_ tableView: UITableView,
                             didDeselectRowAt indexPath: IndexPath) {
         editAssessmentButton.isEnabled = false
-      
+        UserDefaults.standard.set(0, forKey: "doRetrieveMasterCell")
     }
     
    
-    
+    // MARK: - Configure Cell
     func configureCell(_ cell: UITableViewCell, withAssessment assessment: Assessment) {
         cell.textLabel!.text = assessment.moduleName
         cell.backgroundColor = cellColour
+        
+        
     }
     
     // MARK: - Fetched results controller
@@ -207,6 +241,7 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
             editAssessmentButton.isEnabled = false
             detailViewController?.addTaskButton.isEnabled = false
             currentAssessment = nil
+           UserDefaults.standard.set(0, forKey: "doRetrieveMasterCell")
             
            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "loadNilAssessmentSummary"), object: nil)
            break

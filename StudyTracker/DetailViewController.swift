@@ -27,18 +27,46 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
     @IBOutlet weak var addTaskButton: UIBarButtonItem!
     
     
-  //  let cellColour:UIColor = UIColor(red: 0.0, green: 1.0, blue: 0.0, alpha: 0.1)
-  //  let cellSelColour:UIColor = UIColor(red: 0.0, green: 1.0, blue: 0.0, alpha: 0.2)
+    //  let cellColour:UIColor = UIColor(red: 0.0, green: 1.0, blue: 0.0, alpha: 0.1)
+    //  let cellSelColour:UIColor = UIColor(red: 0.0, green: 1.0, blue: 0.0, alpha: 0.2)
     let cellColour:UIColor = UIColor(red: 1.0, green: 147.0/255.0, blue: 0.0, alpha: 0.1)
     let cellSelColour:UIColor = UIColor(red: 1.0, green: 157.0/255.0, blue: 0.0, alpha: 0.2)
     let managedObjectContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    var fetchPerformed = false
+    var selectedTask: Task? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.delegate = self
         self.tableView.dataSource = self
-        // Do any additional setup after loading the view.
+        
+        
         configureView()
+        
+        
+        // Restoring UI State:
+      //  if UserDefaults.standard.integer(forKey: "doRetrieveDetailCell") == 1
+      //      && UserDefaults.standard.integer(forKey: "doRetrieveMasterCell") == 1 {
+      //      let indexPathRestored = NSIndexPath(row: UserDefaults.standard.integer(forKey: "lastSelectedDetailCell"), section: 0)
+            
+      //      self.tableView.selectRow(at: indexPathRestored as IndexPath, animated: true, scrollPosition: UITableView.ScrollPosition.none)
+      //      tableView.delegate?.tableView!(tableView!, didSelectRowAt: indexPathRestored as IndexPath)
+            //let cell = tableView.cellForRow(at: indexPathRestored as IndexPath)
+            //performSegue(withIdentifier: "showDetail", sender: cell)
+            
+            
+            //   if (UserDefaults.standard.integer(forKey: "addTaskPopoverActive") == 1) {
+            //           performSegue(withIdentifier: "addTask", sender: cell)
+            //   }
+            //   else if (UserDefaults.standard.integer(forKey: "editTaskPopoverActive") == 1) {
+            //       performSegue(withIdentifier: "editTask", sender: cell)
+            //   }
+            
+       // }
+        
+        
+        // Do any additional setup after loading the view.
+        
         
         // disables editTask button if no tasks are present
         //if (numberOfSections(in: tableView) > 0){
@@ -60,10 +88,13 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
         AvgProgress.reset()
         
     }
+    
+    
     @objc func disableEditTaskDueLostFocus(){
         editTaskButton.isEnabled = false
     }
     override func viewDidDisappear(_ animated: Bool) {
+        
         editTaskButton.isEnabled = false
         addTaskButton.isEnabled = false
     }
@@ -123,15 +154,15 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
                 let progressRatio: Float = Float(Float(currentProgress)/Float(maxProgress))
                 cell.progressBarDaysLeft.progress = CGFloat(progressRatio)
                 
-               // print("CELLS CURRENT PROGRESS \(currentProgress)")
-               // print("MAX PROGRESS \(maxProgress)")
-               // print("PROGRESS RATIO \(progressRatio)")
+                // print("CELLS CURRENT PROGRESS \(currentProgress)")
+                // print("MAX PROGRESS \(maxProgress)")
+                // print("PROGRESS RATIO \(progressRatio)")
                 
             }
             else{ // can happen if user sets the task at default DateTime
-               // print("CELLS MAX PROGRESS IS 0")
-               // print("DATE WHEN SET: \(String(describing: dateWhenSet?.description))")
-               // print("DATE DUE: \(String(describing: dateDue?.description))")
+                // print("CELLS MAX PROGRESS IS 0")
+                // print("DATE WHEN SET: \(String(describing: dateWhenSet?.description))")
+                // print("DATE DUE: \(String(describing: dateDue?.description))")
                 cell.progressBarDaysLeft.progress = 1
             }
         }
@@ -140,6 +171,7 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
         
         // 4. Set cell indexes
         cell.cellNo.text = "Task " + String(indexPath.row+1)
+        
         
         // 5. Set cell notes
         if let taskNotes =  self.fetchedResultsController.fetchedObjects?[indexPath.row].notes {
@@ -157,6 +189,11 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
         if (AvgProgress.getMembers() == rowsNum){
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "reloadPercentCompletedProgressBar"), object: nil)
         }
+        
+       // if (fetchedTask?.isLastSelected ?? false) {
+       //     self.tableView.selectRow(at: indexPath, animated: false, scrollPosition: UITableView.ScrollPosition.none)
+       //     editTaskButton.isEnabled = true
+       // }
     }
     
     func numberOfSections( in tableView: UITableView) -> Int {
@@ -232,6 +269,9 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
         backgroundView.backgroundColor = cellSelColour
         cell.selectedBackgroundView = backgroundView
         
+        
+        
+        
         return cell
     }
     
@@ -262,8 +302,8 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
             fetchRequest.predicate = predicate
         }
         else {
-            // force programamtic seleciton to the first line?
-            // Instead, impossible predicate given, hack..
+ 
+            // impossible predicate given to load none if assessment is nil
             let predicate = NSPredicate(format: "assessment = %@",  "")
             fetchRequest.predicate = predicate
         }
@@ -281,6 +321,7 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
         
         do {
             try _fetchedResultsController!.performFetch()
+            fetchPerformed = true
         } catch {
             // Replace this implementation with code to handle the error appropriately.
             // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
@@ -299,6 +340,7 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
     // MARK: - TABLE EDITING
     func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         tableView.beginUpdates()
+        
     }
     
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
@@ -330,7 +372,7 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
             editTaskButton.isEnabled = false
         case .update:
             self.configureCell(tableView.cellForRow(at: indexPath!)!, indexPath: newIndexPath!)
-            //editTaskButton.isEnabled = false
+        //editTaskButton.isEnabled = false
         case .move:
             self.configureCell(tableView.cellForRow(at: indexPath!)!, indexPath: newIndexPath!)
             tableView.moveRow(at: indexPath!, to: newIndexPath!)
@@ -346,17 +388,16 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
             AvgProgress.reset()
         }
         else{
+            AvgProgress.reset()
             // @@@@@@@@@@@@@@@@@@@@@@@@
             // REFERENCE FROM: https://stackoverflow.com/questions/30281451/iterate-over-all-the-uitablecells-given-a-section-id
             // User Steve at https://stackoverflow.com/users/5553768/steve
-            
-            AvgProgress.reset()
             for section in 0...self.tableView.numberOfSections - 1 {
                 for row in 0...self.tableView.numberOfRows(inSection: section) - 1 {
                     let cell: CustomTableViewCell = self.tableView.cellForRow(at: NSIndexPath(row: row, section: section) as IndexPath) as! CustomTableViewCell
-                    
+                   
                     //print("Section: \(section)  Row: \(row)")
-                // @@@@@@@@@@@@@@@@@@@@@@@@
+                    // @@@@@@@@@@@@@@@@@@@@@@@@
                     AvgProgress.add(cell.progressBarPercentLeft.progress)
                 }
             }
@@ -385,13 +426,26 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("Selected cell number: \(indexPath.row) ")
         editTaskButton.isEnabled = true
+        //UserDefaults.standard.set(indexPath.row, forKey: "lastSelectedDetailCell")
+       // UserDefaults.standard.set(1, forKey: "doRetrieveDetailCell")
+        //selectedTask = self.fetchedResultsController.fetchedObjects?[indexPath.row]
+        
+       // if (isViewLoaded && fetchPerformed) {
+       //     let fetchedTask = self.fetchedResultsController.object(at: indexPath)
+       //     fetchedTask.isLastSelected = true
+        //}
     }
     
     func tableView(_ tableView: UITableView,
                    didDeselectRowAt indexPath: IndexPath) {
         editTaskButton.isEnabled = false
+        //UserDefaults.standard.set(0, forKey: "doRetrieveDetailCell")
+        
+       // let fetchedTask = self.fetchedResultsController.fetchedObjects?[indexPath.row]
+      //  fetchedTask!.isLastSelected = false
+       // selectedTask = nil
     }
-
+    
     
 }
 

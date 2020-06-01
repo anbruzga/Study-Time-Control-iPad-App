@@ -23,6 +23,9 @@ class EditAssessmentViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        UserDefaults.standard.set(1, forKey: "editAssessmentPopoverActive")
+        
         module.text = currentAssessment?.moduleName
         type.text = currentAssessment?.type
         value.text = currentAssessment?.value
@@ -40,7 +43,12 @@ class EditAssessmentViewController: UIViewController {
         
         
     }
-   
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        UserDefaults.standard.set(0, forKey: "editAssessmentPopoverActive")
+    }
+    
+    
     @IBAction func updateAssessment(_ sender: UIButton) {
         
         if self.module.text!.count > 0 && self.type.text!.count > 0 {
@@ -92,10 +100,7 @@ class EditAssessmentViewController: UIViewController {
             if(val == ""){
                 return true
             }
-            if (datePicker.date > Date().advanced(by: 60 as TimeInterval)){ // one minute to fix issues when adding on the spot
-                showAlert("Syntax Error", "Mark can only be set for the past assessments")
-                return false
-            }
+            
             
             if (!isNum(val)){
                 showAlert("Error", "Mark should be in range 0 to 100")
@@ -110,6 +115,10 @@ class EditAssessmentViewController: UIViewController {
         if let mark = self.mark.text {
             if(mark == ""){
                 return true
+            }
+            if (datePicker.date > Date().advanced(by: 60 as TimeInterval)){ // one minute to fix issues when adding on the spot
+                showAlert("Syntax Error", "Mark can only be set for the past assessments")
+                return false
             }
             if (!isNum(mark)){
                 showAlert("Syntax Error", "Mark should be in range 0 to 100")

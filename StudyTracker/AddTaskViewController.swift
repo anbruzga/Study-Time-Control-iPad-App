@@ -24,13 +24,15 @@ class AddTaskViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         labelNotes.text = ""
-        
+          UserDefaults.standard.set(1, forKey: "addTaskPopoverActive")
        // datePicker.minimumDate = currentAssessment?.dateWhenSet
        // datePicker.maximumDate = currentAssessment?.reminderDate
-        
-        // Do any additional setup after loading the view.
     }
-    
+       
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        UserDefaults.standard.set(0, forKey: "addTaskPopoverActive")
+    }
     
     @IBAction func saveTask(_ sender: UIButton) {
         if self.labelTaskName.text!.count > 0 {
@@ -45,7 +47,7 @@ class AddTaskViewController: UIViewController {
             newTask.progress = sliderProgress.value
             newTask.startDate = Date()
             newTask.taskDueDate = datePicker.date
-            
+            newTask.isLastSelected = false
             newTask.isReminderSet = switchAddNotification.isOn
             
             currentAssessment?.addToHasTasks(newTask)

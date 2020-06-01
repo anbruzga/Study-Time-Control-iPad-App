@@ -42,11 +42,14 @@ class EditTaskViewController: UIViewController {
             self.presentingViewController!.dismiss(animated: false, completion: nil)
         }
         
-        
+        UserDefaults.standard.set(1, forKey: "editTaskPopoverActive")
         
     }
     
-    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        UserDefaults.standard.set(0, forKey: "editTaskPopoverActive")
+    }
     
     @IBAction func updateTask(_ sender: UIButton) {
         currentTask?.title = labelTaskName.text

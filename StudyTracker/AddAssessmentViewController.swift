@@ -39,7 +39,32 @@ class AddAssessmentViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        /*
+        if (UserDefaults.standard.integer(forKey: "addAssessmentPopoverActive") == 1){
+            UserDefaults.standard.string(forKey: "addAssessmentModule")
+            self.notes.text =  UserDefaults.standard.string(forKey: "addAssessmentNotes")
+            self.value.text  = UserDefaults.standard.string(forKey: "addAssessmentText")
+            self.markAchieved.text =  UserDefaults.standard.string(forKey: "addAssessmentMark")
+          //  self.datePicker.date =  UserDefaults.standard.object(forKey: "addAssessmentDatePicker") as! Date
+            self.saveToCal.isOn =   UserDefaults.standard.bool(forKey: "addAssessmentSaveToCal")
+        }*/
+        
+        UserDefaults.standard.set(1, forKey: "addAssessmentPopoverActive")
+    
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        
+       /*
+        UserDefaults.standard.set(self.module.text, forKey: "addAssessmentModule")
+        UserDefaults.standard.set(self.notes.text, forKey: "addAssessmentNotes")
+        UserDefaults.standard.set(self.value.text, forKey: "addAssessmentText")
+        UserDefaults.standard.set(self.markAchieved.text, forKey: "addAssessmentMark")
+        UserDefaults.standard.set(self.datePicker.date, forKey: "addAssessmentDatePicker")
+        UserDefaults.standard.set(self.saveToCal.isOn, forKey: "addAssessmentSaveToCal")
+        */
+        UserDefaults.standard.set(0, forKey: "addAssessmentPopoverActive")
+        super.viewWillDisappear(animated)
     }
     
     // MARK: ONCLICK
@@ -63,7 +88,10 @@ class AddAssessmentViewController: UIViewController {
             newAssessment.isReminderSet = saveToCal.isOn // save if on
             newAssessment.dateWhenSet = Date()
             
-        
+            
+            
+            
+            
             //set reminder in default reminders application
             let title = self.module.text! + ": " + self.type.text!
             if saveToCal.isOn {
@@ -94,11 +122,6 @@ class AddAssessmentViewController: UIViewController {
             if(val == ""){
                 return true
             }
-            if (datePicker.date > Date().advanced(by: 60 as TimeInterval)){ // one minute to fix issues when adding on the spot
-                showAlert("Syntax Error", "Mark can only be set for the past assessments")
-                return false
-            }
-                
             if (!isNum(val)){
                 showAlert("Error", "Mark should be in range 0 to 100")
                 return false
@@ -112,6 +135,10 @@ class AddAssessmentViewController: UIViewController {
         if let mark = self.markAchieved.text {
             if(mark == ""){
                 return true
+            }
+            if (datePicker.date > Date().advanced(by: 60 as TimeInterval)){ // one minute to fix issues when adding on the spot
+                showAlert("Syntax Error", "Mark can only be set for the past assessments")
+                return false
             }
             if (!isNum(mark)){
                 showAlert("Syntax Error", "Mark should be in range 0 to 100")
@@ -128,7 +155,7 @@ class AddAssessmentViewController: UIViewController {
     func isNum(_ val: String) -> Bool {
         return (val.lowercased() == val.uppercased() && val.isNumber)
     }
-   
+    
     
     
     // MARK: - UTILITIES
