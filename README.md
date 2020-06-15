@@ -23,4 +23,4 @@ The program uses Core Data to store the information related.
 All the time left caclulations looks at the interval between when the task/assessment was set, what is the time now, and when is it the deadline for it.
 
 ### Example
-![Screenshot](Example-Screenshot.png)
+![Screenshot](Screenshot-Example.png)
